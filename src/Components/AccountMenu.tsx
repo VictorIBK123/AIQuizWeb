@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useContext } from 'react';
-import { ChevronDown, User, LogOut, BarChart2 } from 'lucide-react';
+import { ChevronDown, LogOut } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Text } from './UI';
 import { themeContext } from '../Context/context';

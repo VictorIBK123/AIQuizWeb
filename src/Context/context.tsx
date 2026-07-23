@@ -3,7 +3,7 @@ import { colorsDefinition } from "../constants"
 
 export const themeContext = createContext({
     colors: colorsDefinition.dark,
-    setColors: (colors: typeof colorsDefinition.dark) => { }
+    setColors: (_colors: typeof colorsDefinition.dark) => { }
 })
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     const [colorsLocal, setColorsLocal] = useState(colorsDefinition.dark)
@@ -18,9 +18,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const authContext = createContext({
     user: null as { email: string } | null,
-    setUser: (user: { email: string } | null) => { },
+    setUser: (_user: { email: string } | null) => { },
     accessToken: null as string | null,
-    setAccessToken: (token: string | null) => { },
+    setAccessToken: (_token: string | null) => { },
 })
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {

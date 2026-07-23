@@ -163,7 +163,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
             }
 
             if (mode === 'resetPassword') {
-                const res = await resetPasswordService(email, otp.join(''), newPassword);
+                await resetPasswordService(email, otp.join(''), newPassword);
                 setSuccessMessage('Your password has been reset — please sign in.');
                 setNewPassword('');
                 setConfirmNewPassword('');

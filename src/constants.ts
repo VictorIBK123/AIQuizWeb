@@ -43,4 +43,4 @@ export const fonts = {
 
 export const timeout = 60000;
 
-export const baseUrl = import.meta.env.DEV ? '' : (import.meta.env.VITE_BASE_URL || 'http://10.199.184.233:3001');
+export const baseUrl = import.meta.env.DEV ? '' : import.meta.env.VITE_BASE_URL;
