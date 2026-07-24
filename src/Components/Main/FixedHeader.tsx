@@ -39,7 +39,7 @@ const FixedHeader = () => {
 
     return (
         <>
-            <Box variant='card' className='z-50 fixed top-0 left-0 w-full h-19 text-white flex items-center justify-between px-10'>
+            <Box variant='card' className='z-50 fixed top-0 left-0 w-screen h-19 text-white flex items-center justify-between px-10'>
                 <div className='flex items-center flex-row'>
                     <img src={appIcon} alt="Logo" className="h-8 rounded-lg" />
                     <Text className='ml-4 font-bold'>AIQuiz</Text>

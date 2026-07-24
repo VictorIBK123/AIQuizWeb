@@ -5,7 +5,7 @@ const Features = () => {
     return (
         <Box className='mt-8 flex flex-col justify-center'>
             <hr className='w-full border-t border-gray-700' />
-            <Box className='py-7 flex self-center w-130 justify-between'>
+            <Box className='py-7 flex self-center justify-between'>
                 <Box>
                     <Text className='text-3xl text-center font-bold'>{`<30s`}</Text>
                     <Text className='mt-2 text-center' variant='soft' style={{ fontFamily: fonts.body }}>To generate a quiz</Text>
