@@ -220,7 +220,7 @@ const Main = () => {
 
   return (
     <uiContext.Provider value={{ openSignup: () => setShowSignup(true), requestUpgrade, isSubscribing, isPremium, subscription }}>
-      <div style={{ backgroundColor: colors.background }} className='min-h-screen w-full transition-colors duration-300'>
+      <div style={{ backgroundColor: colors.background }} className='min-h-screen px-4 md:px-0 w-full transition-colors duration-300'>
         <Toast toast={paymentToast} />
         <FixedHeader />
         <AuthModal

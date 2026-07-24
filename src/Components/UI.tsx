@@ -15,7 +15,7 @@ interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
 }
 
 interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
-    variant?: 'bare' | 'small' | 'card';
+    variant?: 'bare' | 'small' | 'card' | 'fixed-header';
 }
 
 export const Input: React.FC<InputProps> = ({ className, style, ...props }) => {
@@ -115,6 +115,12 @@ export const Box: React.FC<BoxProps> = ({ children, variant, className, style, .
             '--border-color': colors.textSoft,
             '--border-radius': '50px',
             '--border-width': '1px',
+        },
+        'fixed-header': {
+            '--bg-color': colors.background,
+            '--border-color': colors.textSoft,
+            '--border-radius': '0px',
+            '--border-width': '0px',
         },
         card: {
             '--bg-color': colors.backgroundRaised,

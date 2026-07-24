@@ -7,7 +7,7 @@ import { Box, Button, Text } from "../UI";
 import Switch from '@mui/material/Switch';
 import { useContext, useEffect, useState } from "react";
 import { authContext, themeContext } from "../../Context/context";
-import { colorsDefinition } from "../../constants";
+import { colorsDefinition, theme } from "../../constants";
 import { AccountMenu } from "../AccountMenu";
 import { scrollToSection } from "../../utils/Scrolltosection";
 
@@ -18,7 +18,7 @@ const FixedHeader = () => {
     const [successEmail, setSuccessEmail] = useState('');
     const { setUser, user, setAccessToken } = useContext(authContext);
     const { setColors } = useContext(themeContext);
-
+    const { colors } = useContext(themeContext);
     useEffect(() => {
         setColors(darkMode ? colorsDefinition.dark : colorsDefinition.light);
     }, [darkMode])
@@ -39,7 +39,7 @@ const FixedHeader = () => {
 
     return (
         <>
-            <Box variant='card' className='z-50 fixed top-0 left-0 w-screen h-19 text-white flex items-center justify-between px-10'>
+            <Box variant='fixed-header' className='z-50 fixed top-0 left-0 w-screen h-19 text-white flex items-center justify-between px-10'>
                 <div className='flex items-center flex-row'>
                     <img src={appIcon} alt="Logo" className="h-8 rounded-lg" />
                     <Text className='ml-4 font-bold'>AIQuiz</Text>
@@ -61,14 +61,11 @@ const FixedHeader = () => {
                             <Button variant='ghost' className='ml-4 max-md:hidden' onClick={() => setShowAuth(true)}>
                                 <Text>Sign in</Text>
                             </Button>
-                            <Button variant='primary' className='ml-4'>
-                                <Text>Download</Text>
-                            </Button>
                         </>
                     )}
 
                     <button onClick={() => setMobileOpen((o) => !o)} className='md:hidden ml-4 cursor-pointer'>
-                        {mobileOpen ? <X color='white' /> : <Menu color='white' />}
+                        {mobileOpen ? <X color='white' /> : <Menu color={colors.text} />}
                     </button>
                 </div>
                 <hr className='absolute bottom-0 left-0 w-full border-t border-gray-700' />
