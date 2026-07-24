@@ -7,7 +7,7 @@ import { Box, Button, Text } from "../UI";
 import Switch from '@mui/material/Switch';
 import { useContext, useEffect, useState } from "react";
 import { authContext, themeContext } from "../../Context/context";
-import { colorsDefinition, theme } from "../../constants";
+import { colorsDefinition, } from "../../constants";
 import { AccountMenu } from "../AccountMenu";
 import { scrollToSection } from "../../utils/Scrolltosection";
 
