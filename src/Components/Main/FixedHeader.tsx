@@ -1,10 +1,9 @@
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { AuthModal } from "../AuthModal";
 import { MobileMenu } from "../MobileMenu";
 import appIcon from '../../assets/app-icon.png'
 import { SignInSuccessToast } from "../SignInSuccessToast";
 import { Box, Button, Text } from "../UI";
-import Switch from '@mui/material/Switch';
 import { useContext, useEffect, useState } from "react";
 import { authContext, themeContext } from "../../Context/context";
 import { colorsDefinition, } from "../../constants";
@@ -52,7 +51,19 @@ const FixedHeader = () => {
                     ))}
                 </div>
                 <div className='flex items-center flex-row'>
-                    <Switch onChange={(_e, checked) => setDarkMode(checked)} defaultChecked color='primary' />
+                    <button
+                        onClick={() => setDarkMode(!darkMode)}
+                        aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                        className='relative flex items-center w-14 h-8 rounded-full px-1 transition-colors duration-300 cursor-pointer'
+                        style={{ backgroundColor: darkMode ? '#334155' : colors.primary }}
+                    >
+                        <span
+                            className='flex items-center justify-center w-6 h-6 rounded-full bg-white shadow-md transform transition-transform duration-300'
+                            style={{ transform: darkMode ? 'translateX(24px)' : 'translateX(0px)' }}
+                        >
+                            {darkMode ? <Moon size={14} color='#334155' /> : <Sun size={14} color={colors.success} />}
+                        </span>
+                    </button>
 
                     {user ? (
                         <AccountMenu email={user.email} onSignOut={handleSignOut} />
@@ -65,7 +76,7 @@ const FixedHeader = () => {
                     )}
 
                     <button onClick={() => setMobileOpen((o) => !o)} className='md:hidden ml-4 cursor-pointer'>
-                        {mobileOpen ? <X color='white' /> : <Menu color={colors.text} />}
+                        {mobileOpen ? <X color={colors.text} /> : <Menu color={colors.text} />}
                     </button>
                 </div>
                 <hr className='absolute bottom-0 left-0 w-full border-t border-gray-700' />

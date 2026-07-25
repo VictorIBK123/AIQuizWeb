@@ -2,11 +2,11 @@ import React, { createContext, useState } from "react"
 import { colorsDefinition } from "../constants"
 
 export const themeContext = createContext({
-    colors: colorsDefinition.dark,
-    setColors: (_colors: typeof colorsDefinition.dark) => { }
+    colors: colorsDefinition.light,
+    setColors: (_colors: typeof colorsDefinition.light) => { }
 })
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-    const [colorsLocal, setColorsLocal] = useState(colorsDefinition.dark)
+    const [colorsLocal, setColorsLocal] = useState(colorsDefinition.light)
 
     return (
         <themeContext.Provider value={{ colors: colorsLocal, setColors: setColorsLocal }}>

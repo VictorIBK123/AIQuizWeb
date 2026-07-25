@@ -45,8 +45,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose, links, on
                     >
                         <Box
                             variant='bare'
-                            className='bg-black/95 px-8 py-8 flex flex-col gap-6 border-t'
-                            style={{ borderColor: colors.border }}
+                            className='px-8 py-8 flex flex-col gap-6 border-t'
+                            style={{ borderColor: colors.border, backgroundColor: colors.background }}
                         >
                             {links.map((link, i) => (
                                 <motion.a
