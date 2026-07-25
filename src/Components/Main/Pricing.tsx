@@ -62,6 +62,7 @@ const Pricing = () => {
                 {plans.map((p, i) => (
                     <Reveal key={p.name} delay={i * 0.1}>
                         <Box
+                            id={`pricing-${p.name.toLowerCase()}`}
                             variant='card'
                             className='p-9 flex flex-col gap-5 relative h-full transition-all duration-200 hover:-translate-y-1'
                             style={p.featured ? { borderColor: colors.primary, borderWidth: '2px', backgroundColor: colors.primarySoft } : undefined}

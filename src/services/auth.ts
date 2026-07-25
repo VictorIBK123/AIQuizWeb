@@ -68,3 +68,16 @@ export const resetPasswordService = async (email: string, code: string, newPassw
     })
     return result.data
 }
+
+export const exchangeHandoffService = async (handoffToken: string) => {
+    const result = await axios.request({
+        url: `${baseUrl}/auth/handoff-token/exchange`,
+        method: 'POST',
+        timeout,
+        headers: {
+            'x-handoff-token': handoffToken,
+
+        }
+    })
+    return result.data
+}

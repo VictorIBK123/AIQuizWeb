@@ -25,6 +25,7 @@ import AppShot from './Components/Main/AppShot';
 import AppActions from './Components/Main/AppActions';
 import BentoFeatures from './Components/Main/BentoFeatures';
 import DownloadCta from './Components/Main/DownloadCta';
+import { exchangeHandoffService } from './services/auth';
 
 
 
@@ -97,14 +98,31 @@ const Main = () => {
 
   useEffect(() => {
 
-    const stored = localStorage.getItem('aiquiz');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        setAccessToken(parsed.accessToken);
-        setUser(parsed.user);
-      } catch {
-        localStorage.removeItem('aiquiz'); // corrupted/old entry — clear it instead of crashing
+    const params = new URLSearchParams(window.location.search);
+    const handoffToken = params.get('handOffToken');
+    let cancelled = false;
+    if (handoffToken) {
+      if (cancelled) return;
+      exchangeHandoffService(handoffToken).then((response) => {
+        console.log("response in exchanging handoff", response)
+        const { accessToken, email } = response;
+        setAccessToken(accessToken);
+        setUser({ email });
+      }).catch((error) => {
+        console.log("error", error.response.data.message)
+      })
+      return () => { cancelled = true; };
+    }
+    else {
+      const stored = localStorage.getItem('aiquiz');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          setAccessToken(parsed.accessToken);
+          setUser(parsed.user);
+        } catch {
+          localStorage.removeItem('aiquiz'); // corrupted/old entry — clear it instead of crashing
+        }
       }
     }
   }, [])
