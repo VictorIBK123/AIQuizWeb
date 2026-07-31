@@ -5,7 +5,7 @@ import Header from "./Header"
 import QuoteComp from "./QuoteComp"
 const steps = [
     { num: 1, title: 'Upload or paste', desc: 'Bring a PDF, DOCX, Image, Keyword or just paste the notes you already have.' },
-    { num: 2, title: 'AI reads it', desc: "AIQuiz works through the material and picks out what's worth testing." },
+    { num: 2, title: 'AI reads it', desc: "Skolarix works through the material and picks out what's worth testing." },
     { num: 3, title: 'Practice', desc: "Take the quiz it builds, see what stuck, revisit what didn't." },
 ]
 

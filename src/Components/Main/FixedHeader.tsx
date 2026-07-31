@@ -1,7 +1,7 @@
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { AuthModal } from "../AuthModal";
 import { MobileMenu } from "../MobileMenu";
-import appIcon from '../../assets/app-icon.png'
+import appIcon from '../../assets/app-icon-real.png'
 import { SignInSuccessToast } from "../SignInSuccessToast";
 import { Box, Button, Text } from "../UI";
 import { useContext, useEffect, useState } from "react";
@@ -41,7 +41,7 @@ const FixedHeader = () => {
             <Box variant='fixed-header' className='z-50 fixed top-0 left-0 w-screen h-19 text-white flex items-center justify-between px-10'>
                 <div className='flex items-center flex-row'>
                     <img src={appIcon} alt="Logo" className="h-8 rounded-lg" />
-                    <Text className='ml-4 font-bold'>AIQuiz</Text>
+                    <Text className='ml-4 font-bold'>Skolarix</Text>
                 </div>
                 <div className='hidden md:flex items-center flex-row'>
                     {centerLinks.map((link) => (

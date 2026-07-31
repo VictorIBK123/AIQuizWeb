@@ -32,7 +32,7 @@ const ScreenshotGallery = () => {
             <Reveal><QuoteComp text='INSIDE THE APP' showIcon={false} /></Reveal>
             <Reveal delay={0.05}>
                 <Box className='flex mt-3'>
-                    <Header>A look at AIQuiz</Header>
+                    <Header>A look at Skolarix</Header>
                 </Box>
             </Reveal>
             <Box

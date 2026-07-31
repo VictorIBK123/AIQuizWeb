@@ -36,7 +36,7 @@ const Desc = () => {
     <Box variant='bare' className='items-center flex-col flex mt-7 px-3'>
       <Header>Your notes, <span style={{ color: colors.primary }}>already </span>turned into a quiz.</Header>
       <Text variant='soft' className='text-lg max-w-lg text-center mt-6' style={{ fontFamily: fonts.body }}>
-        Upload a PDF, DOCX, paste your lecture notes, enter a keyword, drop in a textbook chapter or upload an image. AIQuiz reads it and builds questions that test what you actually need to know.
+        Upload a PDF, DOCX, paste your lecture notes, enter a keyword, drop in a textbook chapter or upload an image. Skolarix reads it and builds questions that test what you actually need to know.
       </Text>
     </Box>
   )
@@ -100,11 +100,11 @@ const Main = () => {
 
     const params = new URLSearchParams(window.location.search);
     const handoffToken = params.get('handOffToken');
+    window.history.replaceState({}, '', '/');
     let cancelled = false;
     if (handoffToken) {
       if (cancelled) return;
       exchangeHandoffService(handoffToken).then((response) => {
-        console.log("response in exchanging handoff", response)
         const { accessToken, email } = response;
         setAccessToken(accessToken);
         setUser({ email });
@@ -206,7 +206,7 @@ const Main = () => {
     }
     else if (pathName.toString() == '/transaction-cancelled') {
       console.log('Payment cancelled, clearing URL');
-      window.history.replaceState({}, '', window.location.pathname);
+      window.history.replaceState({}, '', '/#pricing');
     }
   }, [])
 

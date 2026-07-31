@@ -37,7 +37,7 @@ const Footer = () => {
                 <Box variant='bare'>
                     <Box className='flex items-center flex-row'>
                         <img src={appIcon} alt='Logo' className='h-7 rounded-lg' />
-                        <Text className='ml-3 font-bold'>AIQuiz</Text>
+                        <Text className='ml-3 font-bold'>Skolarix</Text>
                     </Box>
                     <Text variant='soft' className='text-sm mt-3 max-w-60' style={{ fontFamily: fonts.body }}>
                         Turn any PDF, Image, document, or block of notes into a quiz built from your material.
@@ -61,7 +61,7 @@ const Footer = () => {
                 ))}
             </Box>
             <Box variant='bare' className='flex justify-between flex-wrap gap-3 max-w-6xl mx-auto mt-12 pt-6 border-t' style={{ borderColor: colors.border }}>
-                <Text variant='soft' className='text-xs'>© 2026 AIQuiz. All rights reserved.</Text>
+                <Text variant='soft' className='text-xs'>© 2026 Skolarix. All rights reserved.</Text>
             </Box>
         </Box>
     )

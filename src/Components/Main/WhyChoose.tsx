@@ -19,7 +19,7 @@ const WhyChoose = () => {
     const { colors } = useContext(themeContext)
     return (
         <Box variant='bare' className='flex flex-col items-center mt-32 px-3'>
-            <Reveal><QuoteComp text='WHY AIQUIZ' showIcon={false} /></Reveal>
+            <Reveal><QuoteComp text='WHY SKOLARIX' showIcon={false} /></Reveal>
             <Reveal delay={0.05}>
                 <Box className='flex mt-3 max-w-lg'>
                     <Header>Built around the parts of studying that cost the most time</Header>

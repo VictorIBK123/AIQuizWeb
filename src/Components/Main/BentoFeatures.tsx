@@ -1,19 +1,21 @@
-import { Sparkles, FileText, File as FileIcon, ClipboardList, BarChart3, CheckCircle2, Smartphone, SunMoon } from 'lucide-react';
+import { Sparkles, FileText, File as FileIcon, ClipboardList, BarChart3, CheckCircle2, Smartphone, SunMoon, GraduationCap, ListChecks } from 'lucide-react';
 import { Text, Box } from '../UI';
 import { themeContext } from '../../Context/context';
 import { fonts } from '../../constants';
 import { Reveal } from '../Motion';
 import { useContext } from 'react';
+
 const bentoFeatures = [
-    { icon: Sparkles, title: 'Generate AI quizzes', desc: 'Turn any study material into a full quiz in seconds — no manual question-writing required.', big: true },
+    { icon: Sparkles, title: 'Generate AI quizzes', desc: 'Turn any study material into a full quiz in seconds, no manual question-writing required.', big: true },
     { icon: FileText, title: 'PDF support', desc: 'Upload slides or scanned notes as a PDF.' },
     { icon: FileIcon, title: 'Document support', desc: 'Word docs work just as well.' },
     { icon: ClipboardList, title: 'Paste text', desc: 'No file? Paste notes or enter keyword directly.' },
-    { icon: BarChart3, title: 'Difficulty levels', desc: 'Easy, medium, or hard — your call.' },
+    { icon: BarChart3, title: 'Difficulty levels', desc: 'Easy, medium, or hard, your call.' },
+    { icon: ListChecks, title: 'Theory, MCQ & true/false', desc: 'Write out full answers and let AI grade and explain them, or go quick-fire with multiple choice and true/false.', wide: true },
+    { icon: GraduationCap, title: 'Matched to your level', desc: 'Every question is scoped to your profile status.', wide: true },
     { icon: CheckCircle2, title: 'Instant feedback', desc: 'Score and explanation the moment you finish.', wide: true },
     { icon: Smartphone, title: 'Study anywhere', desc: 'A spare five minutes is enough to review.', wide: true },
     { icon: SunMoon, title: 'Light & dark mode', desc: 'Switch themes anytime to match your vibe or save your eyes at night.', wide: true }
-
 ]
 
 const BentoFeatures = () => {

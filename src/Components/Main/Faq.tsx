@@ -10,10 +10,10 @@ import QuoteComp from "./QuoteComp"
 // ---------- FAQ ----------
 const faqs = [
     { q: 'What file formats are supported?', a: 'PDF, Images and common document formats like Word, plus plain pasted text.' },
-    { q: 'Is AIQuiz free?', a: 'Yes, you can generate and take quizzes for free. Premium options are available for heavier use.' },
+    { q: 'Is Skolarix free?', a: 'Yes, you can generate and take quizzes for free. Premium options are available for heavier use.' },
     { q: 'How accurate are the AI-generated questions?', a: 'Questions are generated directly from the material you provide.' },
     { q: 'Can I use my own notes?', a: "That's the main use case, paste your own notes or upload your own files." },
-    { q: 'Does AIQuiz work offline?', a: 'Generating a new quiz needs a connection, but quizzes already generated can be taken offline.' },
+    { q: 'Does Skolarix work offline?', a: 'Generating a new quiz needs a connection, but quizzes already generated can be taken offline.' },
     { q: 'How many quizzes can I generate?', a: 'Free accounts get a generous daily amount; Pro accounts get more quiz generations.' },
 ]
 
