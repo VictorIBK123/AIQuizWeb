@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Reveal } from "../Motion";
 import { Text, Box, Button } from "../UI";
 import QuoteComp from "./QuoteComp";
-import { themeContext, uiContext } from "../../Context/context";
+import { authContext, themeContext, uiContext } from "../../Context/context";
 import Header from "./Header";
 import {
     CheckCircle2
@@ -50,6 +50,7 @@ const plans = [
 const Pricing = () => {
     const { colors } = useContext(themeContext)
     const { openSignup, requestUpgrade, isSubscribing, isPremium, subscription } = useContext(uiContext)
+    const { user } = useContext(authContext)
     return (
         <Box variant='bare' id='pricing' className='scroll-mt-24 flex flex-col items-center mt-32 px-3'>
             <Reveal><QuoteComp text='PRICING' showIcon={false} /></Reveal>
@@ -62,7 +63,7 @@ const Pricing = () => {
                 {plans.map((p, i) => (
                     <Reveal key={p.name} delay={i * 0.1}>
                         <Box
-                            id={`pricing-${p.name.toLowerCase()}`}
+
                             variant='card'
                             className='p-9 flex flex-col gap-5 relative h-full transition-all duration-200 hover:-translate-y-1'
                             style={p.featured ? { borderColor: colors.primary, borderWidth: '2px', backgroundColor: colors.primarySoft } : undefined}
@@ -131,8 +132,9 @@ const Pricing = () => {
                                 </Box>
                             )}
 
-                            {!isPremium && (
+                            {(!isPremium && (p.featured || !user)) && (
                                 <Button
+                                    id={`pricing-${p.name.toLowerCase()}`}
                                     variant={p.featured ? 'primary' : 'ghost'}
                                     className='w-full justify-center'
                                     onClick={p.featured ? requestUpgrade : openSignup}

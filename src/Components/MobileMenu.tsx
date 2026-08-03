@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Text } from './UI';
-import { themeContext } from '../Context/context';
+import { authContext, themeContext } from '../Context/context';
 
 interface MobileMenuProps {
     open: boolean;
@@ -12,6 +12,7 @@ interface MobileMenuProps {
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose, links, onSignInClick }) => {
     const { colors } = useContext(themeContext);
+    const { user } = useContext(authContext);
 
     const handleLinkClick = (e: React.MouseEvent, slug: string) => {
         e.preventDefault();
@@ -60,16 +61,18 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose, links, on
                                     <Text className='text-lg'>{link.text}</Text>
                                 </motion.a>
                             ))}
-                            <Button
-                                variant='ghost'
-                                className='w-full justify-center mt-2'
-                                onClick={() => {
-                                    onClose();
-                                    onSignInClick();
-                                }}
-                            >
-                                <Text>Sign in</Text>
-                            </Button>
+                            {!user && (
+                                <Button
+                                    variant='ghost'
+                                    className='w-full justify-center mt-2'
+                                    onClick={() => {
+                                        onClose();
+                                        onSignInClick();
+                                    }}
+                                >
+                                    <Text>Sign in</Text>
+                                </Button>
+                            )}
                         </Box>
                     </motion.div>
                 </div>
