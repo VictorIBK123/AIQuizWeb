@@ -100,7 +100,8 @@ const Main = () => {
 
     const params = new URLSearchParams(window.location.search);
     const handoffToken = params.get('handOffToken');
-    window.history.replaceState({}, '', '/');
+    const hash = window.location.hash; // capture it first
+    window.history.replaceState({}, '', `/${hash}`)
     let cancelled = false;
     if (handoffToken) {
       if (cancelled) return;
