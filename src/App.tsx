@@ -96,44 +96,12 @@ const Main = () => {
       });
   }, [user, accessToken])
 
-
   useEffect(() => {
-    // handle URL hash for scrolling to sections and payment references b4 clearing
-    const pathName = window.location.pathname;
-    const hash = window.location.hash;
-    window.history.replaceState({}, '', `/${hash}`)
+
     const params = new URLSearchParams(window.location.search);
     const handoffToken = params.get('handOffToken');
-    console.log('Current path:', pathName, 'Hash:', hash.substring(1));
-
-    // scroll to the section if there's a hash in the URL
-    
-    console.log('Checking for payment reference in URL:', pathName.toString());
-    // handle payment reference in URL and clear it after processing
-    if (pathName.toString() == '/transaction-success') {
-      console.log('Payment successful, clearing URL and starting checkout for subscription');
-      window.history.replaceState({}, '', '/');
-      /* start checkout as the previous checkout is for charge
-      to register the user on paystack, then the present checkout is for subscribing */
-      (async () => {
-        await startCheckout();
-      })();
-    }
-    else if (pathName.toString() == '/transaction-cancelled') {
-      console.log('Payment cancelled, clearing URL');
-      window.history.replaceState({}, '', '/#pricing-pro');
-    }
-
-    
-    if (hash) {
-      const el = document.getElementById(hash.substring(1));
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Keep the URL hash in sync without triggering another jump
-        history.pushState(null, '', `#${hash}`);
-      }
-    }
-    // handling handoff token from app redirect
+    const hash = window.location.hash; // capture it first
+    window.history.replaceState({}, '', `/${hash}`)
     let cancelled = false;
     if (handoffToken) {
       if (cancelled) return;
@@ -214,6 +182,34 @@ const Main = () => {
     });
   };
 
+  // handle landing back here after a Paystack redirect
+  useEffect(() => {
+    const pathName = window.location.pathname;
+    const hash = window.location.hash;
+    console.log('Current path:', pathName, 'Hash:', hash.substring(1));
+    if (hash) {
+      const el = document.getElementById(hash.substring(1));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Keep the URL hash in sync without triggering another jump
+        history.pushState(null, '', `#${hash}`);
+      }
+    }
+    console.log('Checking for payment reference in URL:', pathName.toString());
+    if (pathName.toString() == '/transaction-success') {
+      console.log('Payment successful, clearing URL and starting checkout for subscription');
+      window.history.replaceState({}, '', '/');
+      /* start checkout as the previous checkout is for charge
+      to register the user on paystack, then the present checkout is for subscribing */
+      (async () => {
+        await startCheckout();
+      })();
+    }
+    else if (pathName.toString() == '/transaction-cancelled') {
+      console.log('Payment cancelled, clearing URL');
+      window.history.replaceState({}, '', '/#pricing');
+    }
+  }, [])
 
   const startCheckout = async () => {
     const result = await subscribeFunc();
