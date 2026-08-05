@@ -101,10 +101,11 @@ const Main = () => {
     const params = new URLSearchParams(window.location.search);
     const handoffToken = params.get('handOffToken');
     const hash = window.location.hash; // capture it first
-    window.history.replaceState({}, '', `/${hash}`)
+    
     let cancelled = false;
     if (handoffToken) {
       if (cancelled) return;
+      window.history.replaceState({}, '', `/${hash}`)
       exchangeHandoffService(handoffToken).then((response) => {
         const { accessToken, email } = response;
         setAccessToken(accessToken);
@@ -187,14 +188,14 @@ const Main = () => {
     const pathName = window.location.pathname;
     const hash = window.location.hash;
     console.log('Current path:', pathName, 'Hash:', hash.substring(1));
-    if (hash) {
-      const el = document.getElementById(hash.substring(1));
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Keep the URL hash in sync without triggering another jump
-        history.pushState(null, '', `#${hash}`);
-      }
-    }
+    // if (hash) {
+    //   const el = document.getElementById(hash.substring(1));
+    //   if (el) {
+    //     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    //     // Keep the URL hash in sync without triggering another jump
+    //     history.pushState(null, '', `#${hash}`);
+    //   }
+    // }
     console.log('Checking for payment reference in URL:', pathName.toString());
     if (pathName.toString() == '/transaction-success') {
       console.log('Payment successful, clearing URL and starting checkout for subscription');
