@@ -105,7 +105,14 @@ const Main = () => {
     let cancelled = false;
     if (handoffToken) {
       if (cancelled) return;
-      window.history.replaceState({}, '', `/${hash}`)
+      if (hash) {
+      const el = document.getElementById(hash.substring(1));
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Keep the URL hash in sync without triggering another jump
+          history.pushState(null, '', `#${hash}`);
+        }
+      }
       exchangeHandoffService(handoffToken).then((response) => {
         const { accessToken, email } = response;
         setAccessToken(accessToken);
