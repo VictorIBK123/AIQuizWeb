@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { themeContext } from "../../Context/context"
 import { Box, Text } from "../UI"
-import appIcon from '../../assets/app-icon.png'
+import appIcon from '../../assets/app-icon-real.png'
 import { scrollToSection } from "../../utils/Scrolltosection"
 import { fonts } from "../../constants"
 

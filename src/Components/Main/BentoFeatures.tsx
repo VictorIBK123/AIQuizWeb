@@ -88,19 +88,19 @@ const BentoFeatures = () => {
     return (
         <Box
             variant="bare"
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 auto-rows-[170px] sm:auto-rows-[170px] max-w-5xl w-full self-center mt-10 px-3"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 auto-rows-auto max-w-5xl w-full self-center mt-10 px-3"
         >
             {bentoFeatures.map((f, i) => (
                 <Reveal
                     key={i}
                     delay={i * 0.06}
-                    className={`min-w-0 ${
+                    className={`min-w-0 overflow-hidden ${
                         f.big ? 'sm:col-span-2 sm:row-span-2' : ''
                     } ${f.wide ? 'sm:col-span-2' : ''}`}
                 >
                     <Box
                         variant="card"
-                        className="p-6 h-full min-w-0 flex flex-col gap-3 justify-start transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+                        className={`p-6 h-full min-w-0 flex flex-col gap-3 justify-start transition-all duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden ${f.big ? 'sm:min-h-[340px]' : ''}`}
                     >
                         <div
                             className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
@@ -110,7 +110,7 @@ const BentoFeatures = () => {
                         </div>
 
                         <Text
-                            className={`font-bold break-words ${
+                            className={`font-bold wrap-break-word ${
                                 f.big ? 'text-xl' : 'text-base'
                             }`}
                         >
@@ -119,7 +119,7 @@ const BentoFeatures = () => {
 
                         <Text
                             variant="soft"
-                            className="text-sm break-words leading-relaxed"
+                            className="text-sm wrap-break-word leading-relaxed"
                             style={{ fontFamily: fonts.body }}
                         >
                             {f.desc}
