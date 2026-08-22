@@ -101,12 +101,16 @@ const Main = () => {
     const params = new URLSearchParams(window.location.search);
     const handoffToken = params.get('handOffToken');
     const hash = window.location.hash; // capture it first
-    
+
     let cancelled = false;
     if (handoffToken) {
       if (cancelled) return;
+      setPaymentToast({
+        type: 'info',
+        message: 'Please wait while your profile is being fetched',
+      });
       if (hash) {
-      const el = document.getElementById(hash.substring(1));
+        const el = document.getElementById(hash.substring(1));
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
           // Keep the URL hash in sync without triggering another jump
@@ -118,7 +122,11 @@ const Main = () => {
         setAccessToken(accessToken);
         setUser({ email });
       }).catch((error) => {
-        console.log("error", error.response.data.message)
+        console.log("error", error?.response?.data?.message || error.message);
+        setPaymentToast({
+          type: 'error',
+          message: 'Failed to fetch profile',
+        });
       })
       return () => { cancelled = true; };
     }
@@ -186,7 +194,7 @@ const Main = () => {
   const notifyPaymentReceived = () => {
     setPaymentToast({
       type: 'success',
-      message: 'Payment received! Refresh the page in a moment to see your Pro status update.',
+      message: 'Payment received! Refresh the app and page in a moment to see your Pro status update.',
     });
   };
 
@@ -207,6 +215,10 @@ const Main = () => {
     if (pathName.toString() == '/transaction-success') {
       console.log('Payment successful, clearing URL and starting checkout for subscription');
       window.history.replaceState({}, '', '/');
+      setPaymentToast({
+        type: 'info',
+        message: 'Please wait while we subscribe you to our premium plan',
+      });
       /* start checkout as the previous checkout is for charge
       to register the user on paystack, then the present checkout is for subscribing */
       (async () => {
@@ -216,6 +228,10 @@ const Main = () => {
     else if (pathName.toString() == '/transaction-cancelled') {
       console.log('Payment cancelled, clearing URL');
       window.history.replaceState({}, '', '/#pricing');
+      setPaymentToast({
+        type: 'error',
+        message: 'Transaction cancelled',
+      });
     }
   }, [])
 
