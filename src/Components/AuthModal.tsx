@@ -443,9 +443,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
                                     {mode === 'signup' && (
                                         <Text variant='soft' className='text-center mt-4 text-xs' style={{ fontFamily: fonts.body }}>
                                             By creating an account, you agree to our{' '}
-                                            <a href='/terms' className='underline' style={{ color: colors.textSoft }}>Terms</a>
-                                            {' '}and{' '}
-                                            <a href='/privacy' className='underline' style={{ color: colors.textSoft }}>Privacy Policy</a>.
+                                            <a href='https://privacy-policy.skolarix.app/' target='_blank' rel='noopener noreferrer' className='underline' style={{ color: colors.textSoft }}>Privacy Policy</a>.
                                         </Text>
                                     )}
                                 </motion.div>

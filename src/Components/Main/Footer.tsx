@@ -11,18 +11,16 @@ const footerColumns = [
         title: 'NAVIGATE', links: [
             { text: 'Features', href: '#features', slug: 'features' },
             { text: 'FAQ', href: '#faq', slug: 'faq' },
-            { text: 'Contact', href: '#', slug: null }, // no dedicated contact section yet
+            { text: 'Contact', href: 'https://wa.me/2349079172441', slug: null },
         ]
     },
     {
         title: 'LEGAL', links: [
-            { text: 'Privacy policy', href: '#', slug: null },
-            { text: 'Terms of service', href: '#', slug: null },
+            { text: 'Privacy policy', href: 'https://privacy-policy.skolarix.app/', slug: null },
         ]
     },
     {
         title: 'FOLLOW', links: [
-            { text: 'X', href: '#', slug: null },
             { text: 'Instagram', href: '#', slug: null },
         ]
     },
@@ -51,6 +49,8 @@ const Footer = () => {
                                 <a
                                     href={l.href}
                                     key={l.text}
+                                    target={l.href.startsWith('http') ? '_blank' : undefined}
+                                    rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                                     onClick={l.slug ? scrollToSection(l.slug) : undefined}
                                 >
                                     <Text className='text-sm'>{l.text}</Text>

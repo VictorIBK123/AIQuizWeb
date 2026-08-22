@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { Box, Button, Text } from "../UI";
 import { authContext } from "../../Context/context";
+import { scrollToSection } from "../../utils/Scrolltosection";
 
 const AppActions = ({ onCreateAccount, isPremium }: { onCreateAccount: () => void; isPremium: boolean }) => {
     const { user } = useContext(authContext);
     return (
         <Box variant='bare' className='justify-center flex mt-6'>
-            <Button variant='primary' className='w-50'>
+            <Button variant='primary' className='w-50' onClick={scrollToSection('download')}>
                 <Text variant='fixedWhite' className='whitespace-nowrap'>Download the app</Text>
             </Button>
             {(!isPremium && !user) && (
