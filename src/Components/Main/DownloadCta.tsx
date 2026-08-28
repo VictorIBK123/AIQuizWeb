@@ -16,7 +16,7 @@ const DownloadCta = () => {
                 <Text className='text-3xl md:text-4xl font-bold' style={{ color: '#fff' }}>Start studying smarter today.</Text>
                 <Text className='mt-3' style={{ color: 'rgba(255,255,255,0.85)', fontFamily: fonts.body }}>Your next quiz is one upload away.</Text>
                 <Box variant='bare' className='flex justify-center gap-4 flex-wrap mt-8'>
-                    <a href='#' className='px-6 py-3 rounded-lg font-bold text-center w-56 bg-white transition-transform duration-200 hover:scale-105 inline-block' style={{ color: colors.primary }}>
+                    <a href='https://play.google.com/store/apps/details?id=com.victoribk.AIQuizApp' target='_blank' rel='noopener noreferrer' className='px-6 py-3 rounded-lg font-bold text-center w-56 bg-white transition-transform duration-200 hover:scale-105 inline-block' style={{ color: colors.primary }}>
                         Download for Android
                     </a>
                     <button
