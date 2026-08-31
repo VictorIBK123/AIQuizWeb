@@ -9,8 +9,8 @@ import { fonts } from "../../constants"
 // ---------- TESTIMONIALS ----------
 const testimonials = [
     { quote: 'I uploaded my whole database management system slide deck and had a 20-question quiz before I finished my Sprite.', name: 'Titilope Balikis', role: 'Computer Science Student' },
-    { quote: 'Better than making flashcards by hand — it pulls questions from exactly what I highlighted.', name: 'Placeholder name', role: 'University student' },
-    { quote: 'I build practice sets for my class in minutes instead of an afternoon.', name: 'Placeholder name', role: 'Tutor' },
+    { quote: "It's an innovative app that makes learning easier and faster by answering knowledge gaps.", name: 'Akintoye Peterpaul', role: 'Computer Science Student' },
+    { quote: "Really cool 🤭 \nMy favorite is the PDF upload feature. It’s just for me to be uploading my lecturers’ slides and keep practicing🙂‍↕️🙂‍↕️", name: 'Akinniyi Ayomide', role: 'Mathematics Student' },
 ]
 
 const Testimonials = () => {
