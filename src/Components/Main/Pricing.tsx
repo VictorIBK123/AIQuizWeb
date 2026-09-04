@@ -63,9 +63,9 @@ const Pricing = () => {
                 {plans.map((p, i) => (
                     <Reveal key={p.name} delay={i * 0.1}>
                         <Box
-
+                            id={`pricing-${p.name.toLowerCase()}`}
                             variant='card'
-                            className='p-9 flex flex-col gap-5 relative h-full transition-all duration-200 hover:-translate-y-1'
+                            className='scroll-mt-28 p-9 flex flex-col gap-5 relative h-full transition-all duration-200 hover:-translate-y-1'
                             style={p.featured ? { borderColor: colors.primary, borderWidth: '2px', backgroundColor: colors.primarySoft } : undefined}
                         >
                             {p.featured && (
@@ -134,7 +134,7 @@ const Pricing = () => {
 
                             {(!isPremium && (p.featured || !user)) && (
                                 <Button
-                                    id={`pricing-${p.name.toLowerCase()}`}
+                                    id={`btn-pricing-${p.name.toLowerCase()}`}
                                     variant={p.featured ? 'primary' : 'ghost'}
                                     className='w-full justify-center'
                                     onClick={p.featured ? requestUpgrade : openSignup}

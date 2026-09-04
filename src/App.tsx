@@ -110,12 +110,16 @@ const Main = () => {
         message: 'Please wait while your profile is being fetched',
       });
       if (hash) {
-        const el = document.getElementById(hash.substring(1));
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // Keep the URL hash in sync without triggering another jump
-          history.pushState(null, '', `#${hash}`);
-        }
+        const targetId = hash.replace(/^#+/, '');
+        const jumpToTarget = () => {
+          const el = document.getElementById(targetId) || document.getElementById('pricing');
+          if (el) {
+            el.scrollIntoView({ behavior: 'auto', block: 'start' });
+          }
+        };
+        jumpToTarget();
+        requestAnimationFrame(jumpToTarget);
+        setTimeout(jumpToTarget, 60);
       }
       exchangeHandoffService(handoffToken).then((response) => {
         const { accessToken, email } = response;
