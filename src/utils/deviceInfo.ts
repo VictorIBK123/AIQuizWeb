@@ -1,41 +1,9 @@
-export interface LastSeenPayload {
+export interface LastLoginPayload {
     authProvider: 'google' | 'email';
     timeStamp: Date;
-    location: string;
-    platform: 'android' | 'web' | 'manual';
+    platform: 'web';
     device: string;
 }
-
-/**
- * Retrieves GPS coordinates using browser Geolocation API.
- * Times out after 3 seconds so login/register is never blocked if user ignores prompt.
- */
-export const getBrowserLocation = (): Promise<string> => {
-    return new Promise((resolve) => {
-        if (!navigator.geolocation) {
-            resolve('');
-            return;
-        }
-
-        const timer = setTimeout(() => {
-            resolve('');
-        }, 3000);
-
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                clearTimeout(timer);
-                const { latitude, longitude } = position.coords;
-                resolve(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
-            },
-            (error) => {
-                clearTimeout(timer);
-                console.log('[GPS Web] Geolocation unavailable or denied:', error.message);
-                resolve('');
-            },
-            { timeout: 3000, maximumAge: 60000, enableHighAccuracy: true }
-        );
-    });
-};
 
 export const getBrowserDevice = (): string => {
     const ua = navigator.userAgent || '';
@@ -47,14 +15,12 @@ export const getBrowserDevice = (): string => {
     return 'Web Browser';
 };
 
-export const getWebLastSeenPayload = async (authProvider: 'google' | 'email'): Promise<LastSeenPayload> => {
-    const location = await getBrowserLocation();
+export const getWebLastLoginPayload = (authProvider: 'google' | 'email'): LastLoginPayload => {
     const device = getBrowserDevice();
 
     return {
         authProvider,
         timeStamp: new Date(),
-        location,
         platform: 'web',
         device,
     };
