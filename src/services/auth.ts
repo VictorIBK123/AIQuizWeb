@@ -1,16 +1,18 @@
 import axios from "axios"
 import { baseUrl, timeout } from "../constants"
-
+import { getWebLastSeenPayload } from "../utils/deviceInfo"
 
 export const loginWithEmailService = async (email: string, password: string) => {
     console.log('login service called with email:', email)
+    const lastSeen = await getWebLastSeenPayload('email')
     const result = await axios.request({
         url: `${baseUrl}/auth/login`,
         method: 'POST',
         timeout: timeout,
         data: {
             email,
-            password
+            password,
+            lastSeen
         },
     })
     console.log('login service response:', result.data)
@@ -18,6 +20,7 @@ export const loginWithEmailService = async (email: string, password: string) => 
 }
 
 export const registerWithEmailService = async (name: string, email: string, password: string) => {
+    const lastSeen = await getWebLastSeenPayload('email')
     const result = await axios.request({
         url: `${baseUrl}/auth/register`,
         method: 'POST',
@@ -25,7 +28,8 @@ export const registerWithEmailService = async (name: string, email: string, pass
         data: {
             name,
             email,
-            password
+            password,
+            lastSeen
         }
     })
     return result.data
