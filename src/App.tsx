@@ -1,5 +1,7 @@
 import './App.css'
 import { useContext, useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import JoinQuizPage from './Components/JoinQuizPage';
 import { AuthModal } from './Components/AuthModal';
 import { Box, Text } from './Components/UI';
 import { fonts, baseUrl } from './constants';
@@ -320,7 +322,13 @@ function App() {
   return (
     <AuthProvider>
       <ThemeProvider>
-        <Main />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/join/:code" element={<JoinQuizPage />} />
+            <Route path="/join" element={<JoinQuizPage />} />
+            <Route path="*" element={<Main />} />
+          </Routes>
+        </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>
   )
