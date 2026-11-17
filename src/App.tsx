@@ -1,7 +1,8 @@
 import './App.css'
 import { useContext, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import JoinQuizPage from './Components/JoinQuizPage';
+import LegalPage from './Components/Legal/LegalPage';
 import { AuthModal } from './Components/AuthModal';
 import { Box, Text } from './Components/UI';
 import { fonts, baseUrl } from './constants';
@@ -238,6 +239,11 @@ const Main = () => {
         type: 'error',
         message: 'Transaction cancelled',
       });
+    } else if (hash) {
+      const targetId = hash.replace(/^#+/, '');
+      requestAnimationFrame(() => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     }
   }, [])
 
@@ -326,6 +332,12 @@ function App() {
           <Routes>
             <Route path="/join/:code" element={<JoinQuizPage />} />
             <Route path="/join" element={<JoinQuizPage />} />
+            <Route path="/legal" element={<Navigate to="/legal/terms-of-use" replace />} />
+            <Route path="/legal/terms-of-use" element={<LegalPage docType="terms-of-use" />} />
+            <Route path="/legal/terms-and-conditions" element={<Navigate to="/legal/terms-of-use" replace />} />
+            <Route path="/legal/terms" element={<Navigate to="/legal/terms-of-use" replace />} />
+            <Route path="/legal/subscription-policy" element={<LegalPage docType="subscription-policy" />} />
+            <Route path="/legal/subscription" element={<Navigate to="/legal/subscription-policy" replace />} />
             <Route path="*" element={<Main />} />
           </Routes>
         </BrowserRouter>

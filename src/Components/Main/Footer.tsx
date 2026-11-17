@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { Link, useLocation } from "react-router-dom"
 import { themeContext } from "../../Context/context"
 import { Box, Text } from "../UI"
 import appIcon from '../../assets/app-icon-real.png'
@@ -6,17 +7,22 @@ import { scrollToSection } from "../../utils/Scrolltosection"
 import { fonts } from "../../constants"
 
 // ---------- FOOTER ----------
-const footerColumns = [
+const footerColumns: {
+    title: string;
+    links: { text: string; href: string; slug: string | null; isRoute?: boolean }[];
+}[] = [
     {
         title: 'NAVIGATE', links: [
-            { text: 'Features', href: '#features', slug: 'features' },
-            { text: 'FAQ', href: '#faq', slug: 'faq' },
+            { text: 'Features', href: '/#features', slug: 'features' },
+            { text: 'FAQ', href: '/#faq', slug: 'faq' },
             { text: 'Contact', href: 'https://wa.me/2349079172441', slug: null },
         ]
     },
     {
         title: 'LEGAL', links: [
             { text: 'Privacy policy', href: 'https://privacy-policy.skolarix.app/', slug: null },
+            { text: 'Terms of use', href: '/legal/terms-of-use', slug: null, isRoute: true },
+            { text: 'Subscription policy', href: '/legal/subscription-policy', slug: null, isRoute: true },
         ]
     },
     {
@@ -28,6 +34,9 @@ const footerColumns = [
 
 const Footer = () => {
     const { colors } = useContext(themeContext)
+    const location = useLocation()
+    const isHome = location.pathname === '/'
+
     return (
         <Box variant='bare' className='mt-32 px-6 md:px-16 pb-10'>
             <hr className='w-full border-t mb-14' style={{ borderColor: colors.border }} />
@@ -45,17 +54,36 @@ const Footer = () => {
                     <Box variant='bare' key={col.title}>
                         <Text variant='soft' className='text-xs mb-4'>{col.title}</Text>
                         <Box variant='bare' className='flex flex-col gap-3'>
-                            {col.links.map((l) => (
-                                <a
-                                    href={l.href}
-                                    key={l.text}
-                                    target={l.href.startsWith('http') ? '_blank' : undefined}
-                                    rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                    onClick={l.slug ? scrollToSection(l.slug) : undefined}
-                                >
-                                    <Text className='text-sm'>{l.text}</Text>
-                                </a>
-                            ))}
+                            {col.links.map((l) =>
+                                l.isRoute ? (
+                                    <Link to={l.href} key={l.text}>
+                                        <Text className='text-sm'>{l.text}</Text>
+                                    </Link>
+                                ) : l.slug ? (
+                                    isHome ? (
+                                        <a
+                                            href={`#${l.slug}`}
+                                            key={l.text}
+                                            onClick={scrollToSection(l.slug)}
+                                        >
+                                            <Text className='text-sm'>{l.text}</Text>
+                                        </a>
+                                    ) : (
+                                        <Link to={l.href} key={l.text}>
+                                            <Text className='text-sm'>{l.text}</Text>
+                                        </Link>
+                                    )
+                                ) : (
+                                    <a
+                                        href={l.href}
+                                        key={l.text}
+                                        target={l.href.startsWith('http') ? '_blank' : undefined}
+                                        rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                    >
+                                        <Text className='text-sm'>{l.text}</Text>
+                                    </a>
+                                )
+                            )}
                         </Box>
                     </Box>
                 ))}
