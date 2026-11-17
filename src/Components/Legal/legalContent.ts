@@ -109,8 +109,6 @@ export const SUBSCRIPTION_POLICY_DOC: LegalDocument = {
     title: 'Subscription Policy',
     subtitle: 'Clear breakdown of Free vs. Pro (Premium) plan quotas, billing platforms, trials, and cancellations.',
     lastUpdated: 'November 2026',
-    summaryNote:
-        'Updated with current daily quotas (5 Free / 30 Pro text + 15 file/image generations), Strict Mode & Shared Quiz limits, Paystack web checkout, and Google Play / RevenueCat mobile billing.',
     sections: [
         {
             id: 'overview',
@@ -122,7 +120,7 @@ export const SUBSCRIPTION_POLICY_DOC: LegalDocument = {
             id: 'free-plan',
             title: '2. Free Plan Limits & Features',
             bullets: [
-                'Up to 5 AI quiz generations per day from keywords, topics, or pasted text. (PDF, DOCX, and image uploads require Pro.)',
+                'Limited AI quiz generations per day from keywords, topics, or pasted text. (PDF, DOCX, and image uploads require Pro.)',
                 'Full access to Multiple Choice, True/False, and Theory questions across difficulty modes (including Adaptive), plus offline retakes and PDF export.',
                 'Up to 2 Strict Mode quizzes per day.',
                 'Up to 1 retake per quiz (maximum 2 total attempts per quiz).',
@@ -135,7 +133,7 @@ export const SUBSCRIPTION_POLICY_DOC: LegalDocument = {
             id: 'pro-plan',
             title: '3. Pro (Premium) Plan Features',
             bullets: [
-                'Increased daily capacity: up to 30 AI quiz generations per day (keywords/text) plus up to 15 daily file or image quiz generations (PDF, DOCX, and images).',
+                'Increased daily capacity: generous AI quiz generations per day (keywords/text) plus up to 15 daily file or image quiz generations (PDF, DOCX, and images).',
                 'Unlimited Strict Mode quizzes and unlimited retakes per quiz.',
                 'Unlimited saved quizzes ("Save for Later") and full access to your entire Quiz History with live search and category filtering.',
                 'Unlimited active Shared Quizzes and unlimited participant attempt tracking with PDF & CSV exports.',
@@ -148,7 +146,7 @@ export const SUBSCRIPTION_POLICY_DOC: LegalDocument = {
             title: '4. Pricing & 7-Day Free Trial',
             bullets: [
                 'Eligible new subscribers receive a 7-day free trial before the first recurring charge.',
-                'Web Pricing: Currently listed at ₦1,500 / month via Paystack (or the current price displayed at web checkout).',
+                'Web Pricing: Currently listed via Paystack ',
                 'Mobile Pricing: Displayed in your local currency inside the Google Play or Apple App Store purchase sheet prior to confirmation.',
             ],
         },
@@ -156,7 +154,7 @@ export const SUBSCRIPTION_POLICY_DOC: LegalDocument = {
             id: 'billing-and-renewal',
             title: '5. Payment Processing, Auto-Renewal & Restore',
             bullets: [
-                'Web subscriptions are processed securely by Paystack. Mobile in-app subscriptions are billed through your Google Play or Apple App Store account (managed via RevenueCat).',
+                'Web subscriptions are processed securely by Paystack. Mobile in-app subscriptions are billed through your Google Play or Apple App Store account.',
                 'Payment is charged upon purchase confirmation or automatically when your 7-day free trial ends, unless canceled beforehand.',
                 'Subscriptions automatically renew at the end of each monthly billing cycle unless auto-renew is turned off or canceled at least 24 hours before the renewal date.',
                 'On mobile, if you reinstall the app or switch devices using the same store account, you can recover your active entitlement via "Restore Purchases" on the Premium screen.',
