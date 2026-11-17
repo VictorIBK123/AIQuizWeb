@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import JoinQuizPage from './Components/JoinQuizPage';
 import LegalPage from './Components/Legal/LegalPage';
+import DeleteAccountPage from './Components/Legal/DeleteAccountPage';
 import { AuthModal } from './Components/AuthModal';
 import { Box, Text } from './Components/UI';
 import { fonts, baseUrl } from './constants';
@@ -338,6 +339,10 @@ function App() {
             <Route path="/legal/terms" element={<Navigate to="/legal/terms-of-use" replace />} />
             <Route path="/legal/subscription-policy" element={<LegalPage docType="subscription-policy" />} />
             <Route path="/legal/subscription" element={<Navigate to="/legal/subscription-policy" replace />} />
+            <Route path="/legal/privacy-policy" element={<LegalPage docType="privacy-policy" />} />
+            <Route path="/legal/privacy" element={<Navigate to="/legal/privacy-policy" replace />} />
+            <Route path="/del-acct" element={<DeleteAccountPage />} />
+            <Route path="/delete-account" element={<Navigate to="/del-acct" replace />} />
             <Route path="*" element={<Main />} />
           </Routes>
         </BrowserRouter>

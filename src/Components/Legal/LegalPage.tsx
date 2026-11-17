@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, FileText, Moon, ShieldCheck, Sun } from 'lucide-react';
+import { ArrowLeft, FileText, Lock, Moon, ShieldCheck, Sun, Trash2 } from 'lucide-react';
 import appIcon from '../../assets/app-icon-real.png';
 import { colorsDefinition, fonts } from '../../constants';
 import { themeContext } from '../../Context/context';
 import Footer from '../Main/Footer';
 import {
     type LegalDocument,
+    PRIVACY_POLICY_DOC,
     SUBSCRIPTION_POLICY_DOC,
     TERMS_OF_USE_DOC,
 } from './legalContent';
@@ -18,6 +19,7 @@ interface LegalPageProps {
 const DOCUMENTS: Record<LegalDocument['slug'], LegalDocument> = {
     'terms-of-use': TERMS_OF_USE_DOC,
     'subscription-policy': SUBSCRIPTION_POLICY_DOC,
+    'privacy-policy': PRIVACY_POLICY_DOC,
 };
 
 export const LegalPage: React.FC<LegalPageProps> = ({ docType }) => {
@@ -134,20 +136,39 @@ export const LegalPage: React.FC<LegalPageProps> = ({ docType }) => {
                         Subscription Policy
                     </Link>
 
-                    <a
-                        href="https://privacy-policy.skolarix.app/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium border transition-opacity hover:opacity-80"
+                    <Link
+                        to="/legal/privacy-policy"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-colors"
+                        style={
+                            docType === 'privacy-policy'
+                                ? {
+                                      backgroundColor: colors.primary,
+                                      borderColor: colors.primary,
+                                      color: '#FFFFFF',
+                                  }
+                                : {
+                                      backgroundColor: colors.backgroundRaised,
+                                      borderColor: colors.border,
+                                      color: colors.text,
+                                  }
+                        }
+                    >
+                        <Lock size={15} />
+                        Privacy Policy
+                    </Link>
+
+                    <Link
+                        to="/del-acct"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-opacity hover:opacity-80"
                         style={{
                             backgroundColor: colors.backgroundRaised,
                             borderColor: colors.border,
-                            color: colors.textSoft,
+                            color: '#EF4444',
                         }}
                     >
-                        Privacy Policy
-                        <ExternalLink size={14} />
-                    </a>
+                        <Trash2 size={15} />
+                        Delete Account
+                    </Link>
                 </nav>
 
                 {/* Header Card */}

@@ -20,9 +20,10 @@ const footerColumns: {
     },
     {
         title: 'LEGAL', links: [
-            { text: 'Privacy policy', href: 'https://privacy-policy.skolarix.app/', slug: null },
+            { text: 'Privacy policy', href: '/legal/privacy-policy', slug: null, isRoute: true },
             { text: 'Terms of use', href: '/legal/terms-of-use', slug: null, isRoute: true },
             { text: 'Subscription policy', href: '/legal/subscription-policy', slug: null, isRoute: true },
+            { text: 'Delete account', href: '/del-acct', slug: null, isRoute: true },
         ]
     },
     {
