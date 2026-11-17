@@ -89,7 +89,7 @@ const Footer = () => {
                 ))}
             </Box>
             <Box variant='bare' className='flex justify-between flex-wrap gap-3 max-w-6xl mx-auto mt-12 pt-6 border-t' style={{ borderColor: colors.border }}>
-                <Text variant='soft' className='text-xs'>© 2026 Skolarix. All rights reserved.</Text>
+                <Text variant='soft' className='text-xs'>© 2026 VictorIbk Labs. All rights reserved.</Text>
             </Box>
         </Box>
     )
