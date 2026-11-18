@@ -4,11 +4,12 @@ import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import JoinQuizPage from './Components/JoinQuizPage';
 import LegalPage from './Components/Legal/LegalPage';
 import DeleteAccountPage from './Components/Legal/DeleteAccountPage';
+import SupportPage from './Components/Legal/SupportPage';
 import { AuthModal } from './Components/AuthModal';
-import { Box, Text } from './Components/UI';
+import { Text } from './Components/UI';
 import { fonts, baseUrl } from './constants';
 import { authContext, AuthProvider, themeContext, ThemeProvider, uiContext } from './Context/context';
-import { Reveal, FadeIn } from './Components/Motion';
+import { FadeIn } from './Components/Motion';
 import { SignInSuccessToast } from './Components/SignInSuccessToast';
 import { Toast, type ToastState } from './Components/Toast';
 import { usePayment } from './hooks/usePayment';
@@ -16,13 +17,11 @@ import { getProfileData } from './services/profile';
 import axios from 'axios';
 import Footer from './Components/Main/Footer';
 import FixedHeader from './Components/Main/FixedHeader';
-import Header from './Components/Main/Header';
 import FAQ from './Components/Main/Faq';
 import Testimonials from './Components/Main/Textimonials';
 import WhyChoose from './Components/Main/WhyChoose';
 import ScreenshotGallery from './Components/Main/ScreenshotGallery';
 import HowItWorks from './Components/Main/HowItWorks';
-import QuoteComp from './Components/Main/QuoteComp';
 import Features from './Components/Main/Features';
 import Pricing from './Components/Main/Pricing';
 import AppShot from './Components/Main/AppShot';
@@ -30,21 +29,6 @@ import AppActions from './Components/Main/AppActions';
 import BentoFeatures from './Components/Main/BentoFeatures';
 import DownloadCta from './Components/Main/DownloadCta';
 import { exchangeHandoffService } from './services/auth';
-
-
-
-// ---------- HERO ----------
-const Desc = () => {
-  const { colors } = useContext(themeContext);
-  return (
-    <Box variant='bare' className='items-center flex-col flex mt-7 px-3'>
-      <Header>Your notes, <span style={{ color: colors.primary }}>already </span>turned into a quiz.</Header>
-      <Text variant='soft' className='text-lg max-w-lg text-center mt-6' style={{ fontFamily: fonts.body }}>
-        Upload a PDF, DOCX, paste your lecture notes, enter a keyword, drop in a textbook chapter or upload an image. Skolarix reads it and builds questions that test what you actually need to know.
-      </Text>
-    </Box>
-  )
-}
 
 
 
@@ -276,7 +260,7 @@ const Main = () => {
 
   return (
     <uiContext.Provider value={{ openSignup: () => setShowSignup(true), requestUpgrade, isSubscribing, isPremium, subscription }}>
-      <div style={{ backgroundColor: colors.background }} className='min-h-screen px-4 md:px-0 w-full transition-colors duration-300'>
+      <div style={{ backgroundColor: colors.background }} className='min-h-screen w-full transition-colors duration-200'>
         <Toast toast={paymentToast} />
         <FixedHeader />
         <AuthModal
@@ -290,35 +274,71 @@ const Main = () => {
           email={signupSuccessEmail}
           onDismiss={() => setSignupSuccessEmail('')}
         />
-        <div className='flex w-full flex-col flex-1 pt-30'>
-          <FadeIn><QuoteComp text='Now generating from PDF, DOCX, text and images' showIcon /></FadeIn>
-          <FadeIn delay={0.1}><Desc /></FadeIn>
-          <FadeIn delay={0.2}><AppActions onCreateAccount={() => setShowSignup(true)} isPremium={isPremium} /></FadeIn>
-          <FadeIn delay={0.25}>
-            <Text className='text-center mt-3' variant='soft' style={{ fontFamily: fonts.body }}>
-              Free to start · no credit card required
-            </Text>
-          </FadeIn>
-          <FadeIn delay={0.3}><AppShot /></FadeIn>
+        <main className='w-full pt-28 md:pt-32'>
+          {/* Two-Column Editorial Hero */}
+          <section className='max-w-6xl mx-auto px-5 md:px-8'>
+            <div className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center'>
+              <div className='lg:col-span-7'>
+                <FadeIn>
+                  <span
+                    className='inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-md border mb-6'
+                    style={{
+                      backgroundColor: colors.backgroundRaised,
+                      borderColor: colors.border,
+                      color: colors.textSoft,
+                      fontFamily: fonts.mono,
+                    }}
+                  >
+                    iOS · Android · Web
+                  </span>
+                </FadeIn>
+
+                <FadeIn delay={0.05}>
+                  <h1
+                    className='text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08]'
+                    style={{ color: colors.text, fontFamily: fonts.display }}
+                  >
+                    Turn your study notes into{' '}
+                    <span style={{ color: colors.primary }}>active recall.</span>
+                  </h1>
+                </FadeIn>
+
+                <FadeIn delay={0.1}>
+                  <Text
+                    variant='soft'
+                    className='mt-6 text-base sm:text-lg leading-relaxed max-w-xl'
+                  >
+                    Upload PDFs, DOCX files, textbook photos, or pasted notes. Skolarix generates tailored quizzes with AI theory grading, Strict Mode exam timers, Shared Quiz codes, and offline review.
+                  </Text>
+                </FadeIn>
+
+                <FadeIn delay={0.15}>
+                  <AppActions onCreateAccount={() => setShowSignup(true)} isPremium={isPremium} />
+                  <Text className='mt-3 text-xs' variant='soft' style={{ fontFamily: fonts.mono }}>
+                    Free to start · No credit card required
+                  </Text>
+                </FadeIn>
+              </div>
+
+              <div className='lg:col-span-5'>
+                <FadeIn delay={0.2}>
+                  <AppShot />
+                </FadeIn>
+              </div>
+            </div>
+          </section>
+
           <Features />
-          <Box variant='bare' id='features' className='scroll-mt-24 flex flex-col items-center'>
-            <Reveal><QuoteComp text='WHAT IT DOES' showIcon={false} /></Reveal>
-            <Reveal delay={0.05}>
-              <Box className='flex mt-3'>
-                <Header>Everything you need to go from material to mastery</Header>
-              </Box>
-            </Reveal>
-            <BentoFeatures />
-          </Box>
+          <BentoFeatures />
           <HowItWorks />
           <ScreenshotGallery />
-          <Pricing />
           <WhyChoose />
+          <Pricing />
           <Testimonials />
           <FAQ />
           <DownloadCta />
-          <Footer />
-        </div>
+        </main>
+        <Footer />
       </div>
     </uiContext.Provider>
   )
@@ -343,6 +363,7 @@ function App() {
             <Route path="/legal/privacy" element={<Navigate to="/legal/privacy-policy" replace />} />
             <Route path="/del-acct" element={<DeleteAccountPage />} />
             <Route path="/delete-account" element={<Navigate to="/del-acct" replace />} />
+            <Route path="/support" element={<SupportPage />} />
             <Route path="*" element={<Main />} />
           </Routes>
         </BrowserRouter>

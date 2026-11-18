@@ -1,9 +1,8 @@
-import { Box, Text } from "../UI"
+import { Text } from "../UI"
 import Header from "./Header"
 import { useContext } from "react"
 import { themeContext } from "../../Context/context"
 import { Reveal } from "../Motion"
-import QuoteComp from "./QuoteComp"
 import { fonts } from "../../constants"
 
 // ---------- TESTIMONIALS ----------
@@ -13,34 +12,66 @@ const testimonials = [
     { quote: "Really cool 🤭 \nMy favorite is the PDF upload feature. It’s just for me to be uploading my lecturers’ slides and keep practicing🙂‍↕️🙂‍↕️", name: 'Akinniyi Ayomide', role: 'Mathematics Student' },
 ]
 
+const getInitials = (name: string) =>
+    name
+        .split(/\s+/)
+        .map((n) => n[0])
+        .slice(0, 2)
+        .join('')
+        .toUpperCase();
+
 const Testimonials = () => {
     const { colors } = useContext(themeContext)
     return (
-        <Box variant='bare' className='flex flex-col items-center mt-32 px-3'>
-            <Reveal><QuoteComp text='FROM PEOPLE USING IT' showIcon={false} /></Reveal>
-            <Reveal delay={0.05}>
-                <Box className='flex mt-3'>
-                    <Header>What early users are saying</Header>
-                </Box>
+        <section className='max-w-6xl mx-auto px-5 md:px-8 pt-24 pb-8'>
+            <Reveal>
+                <div className='max-w-xl mb-12'>
+                    <p
+                        className='text-xs font-semibold uppercase tracking-widest mb-3'
+                        style={{ color: colors.primary, fontFamily: fonts.mono }}
+                    >
+                        Testimonials
+                    </p>
+                    <Header>What learners are saying</Header>
+                </div>
             </Reveal>
-            <Box variant='bare' className='grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl w-full mt-14'>
+
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
                 {testimonials.map((t, i) => (
-                    <Reveal key={i} delay={i * 0.08}>
-                        <Box variant='card' className='p-7 flex flex-col gap-4 h-full transition-all duration-200 hover:-translate-y-1'>
-                            <Text style={{ color: '#FFB100', letterSpacing: '2px' }} className='text-sm'>★★★★★</Text>
-                            <Text className='text-sm leading-relaxed' style={{ fontFamily: fonts.body }}>{t.quote}</Text>
-                            <div className='flex items-center gap-3 mt-2'>
-                                <div className='w-9 h-9 rounded-full flex-none' style={{ backgroundColor: colors.primary }} />
+                    <Reveal key={i} delay={i * 0.06}>
+                        <div
+                            className='rounded-2xl border p-7 flex flex-col justify-between gap-6 h-full'
+                            style={{
+                                backgroundColor: colors.backgroundRaised,
+                                borderColor: colors.border,
+                            }}
+                        >
+                            <div>
+                                <Text style={{ color: '#D97706', letterSpacing: '2px' }} className='text-xs mb-3'>★★★★★</Text>
+                                <Text className='text-sm leading-relaxed'>{t.quote}</Text>
+                            </div>
+                            <div className='flex items-center gap-3 pt-4 border-t' style={{ borderColor: colors.border }}>
+                                <div
+                                    className='w-9 h-9 rounded-full flex-none flex items-center justify-center text-xs font-semibold border'
+                                    style={{
+                                        backgroundColor: colors.backgroundSunken,
+                                        borderColor: colors.border,
+                                        color: colors.text,
+                                        fontFamily: fonts.mono,
+                                    }}
+                                >
+                                    {getInitials(t.name)}
+                                </div>
                                 <div>
-                                    <Text className='font-bold text-sm'>{t.name}</Text>
-                                    <Text variant='soft' className='text-xs' style={{ fontFamily: fonts.body }}>{t.role}</Text>
+                                    <Text className='font-semibold text-sm'>{t.name}</Text>
+                                    <Text variant='soft' className='text-xs'>{t.role}</Text>
                                 </div>
                             </div>
-                        </Box>
+                        </div>
                     </Reveal>
                 ))}
-            </Box>
-        </Box>
+            </div>
+        </section>
     )
 }
 

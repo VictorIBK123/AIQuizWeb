@@ -7,12 +7,12 @@ import Screenshot5 from '../../assets/screenshot5.png'
 import Screenshot6 from '../../assets/screenshot6.png'
 import Screenshot7 from '../../assets/screenshot7.png'
 import Screenshot8 from '../../assets/screenshot8.png'
-import { Box, Text } from '../UI'
+import { Text } from '../UI'
 import { themeContext } from '../../Context/context'
 import { useContext } from 'react'
 import { Reveal } from '../Motion'
-import QuoteComp from './QuoteComp'
 import Header from './Header'
+import { fonts } from '../../constants'
 
 const screenshotDetails = [
     { name: 'Sign In', img: Screenshot1 },
@@ -28,32 +28,54 @@ const screenshotDetails = [
 const ScreenshotGallery = () => {
     const { colors } = useContext(themeContext)
     return (
-        <Box variant='bare' id='screenshots' className='scroll-mt-24 flex flex-col items-center mt-32 px-3'>
-            <Reveal><QuoteComp text='INSIDE THE APP' showIcon={false} /></Reveal>
-            <Reveal delay={0.05}>
-                <Box className='flex mt-3'>
-                    <Header>A look at Skolarix</Header>
-                </Box>
+        <section id='screenshots' className='scroll-mt-24 max-w-6xl mx-auto px-5 md:px-8 pt-24 pb-8'>
+            <Reveal>
+                <div className='max-w-xl mb-10'>
+                    <p
+                        className='text-xs font-semibold uppercase tracking-widest mb-3'
+                        style={{ color: colors.primary, fontFamily: fonts.mono }}
+                    >
+                        Inside the App
+                    </p>
+                    <Header>Designed for calm focus</Header>
+                </div>
             </Reveal>
-            <Box
-                variant='bare'
-                className='flex flex-nowrap gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory mt-14 px-4 max-w-5xl w-full pb-4 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+
+            <div
+                className='rounded-2xl border py-8 px-4 sm:px-6'
+                style={{
+                    backgroundColor: colors.backgroundSunken,
+                    borderColor: colors.border,
+                }}
             >
-                {screenshotDetails.map((item, i) => (
-                    <Reveal key={i} delay={i * 0.08} className='flex-none snap-center'>
-                        <Box variant='bare' className='flex flex-col items-center'>
-                            <img
-                                src={item.img}
-                                alt={item.name}
-                                className='rounded-2xl object-cover h-90 w-45 border transition-transform duration-200 hover:scale-105'
-                                style={{ borderColor: colors.border }}
-                            />
-                            <Text variant='soft' className='text-xs mt-3'>{item.name.toUpperCase()}</Text>
-                        </Box>
-                    </Reveal>
-                ))}
-            </Box>
-        </Box>
+                <div className='flex flex-nowrap gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
+                    {screenshotDetails.map((item, i) => (
+                        <div key={item.name} className='flex-none snap-center flex flex-col items-center'>
+                            <div
+                                className='rounded-2xl p-1 border shadow-sm transition-transform duration-200 hover:-translate-y-1'
+                                style={{
+                                    backgroundColor: colors.backgroundRaised,
+                                    borderColor: colors.border,
+                                }}
+                            >
+                                <img
+                                    src={item.img}
+                                    alt={item.name}
+                                    className='rounded-xl object-cover h-84 w-42'
+                                />
+                            </div>
+                            <Text
+                                variant='soft'
+                                className='text-xs mt-3 tracking-wide'
+                                style={{ fontFamily: fonts.mono }}
+                            >
+                                {String(i + 1).padStart(2, '0')} · {item.name}
+                            </Text>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
     )
 }
 

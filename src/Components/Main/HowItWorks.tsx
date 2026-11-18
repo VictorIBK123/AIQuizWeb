@@ -1,37 +1,66 @@
+import { useContext } from "react"
 import { fonts } from "../../constants"
+import { themeContext } from "../../Context/context"
 import { Reveal } from "../Motion"
-import { Box, Text } from "../UI"
+import { Text } from "../UI"
 import Header from "./Header"
-import QuoteComp from "./QuoteComp"
+
 const steps = [
-    { num: 1, title: 'Upload or paste', desc: 'Bring a PDF, DOCX, Image, Keyword or just paste the notes you already have.' },
-    { num: 2, title: 'AI reads it', desc: "Skolarix works through the material and picks out what's worth testing." },
-    { num: 3, title: 'Practice', desc: "Take the quiz it builds, see what stuck, revisit what didn't." },
+    {
+        num: '01',
+        title: 'Add your material',
+        desc: 'Upload a PDF or DOCX file, snap a photo of your notes, paste text, or enter a topic.',
+    },
+    {
+        num: '02',
+        title: 'Customize & generate',
+        desc: 'Pick Multiple Choice, True/False, or Theory, adjust difficulty and Strict Mode timers, and generate in seconds.',
+    },
+    {
+        num: '03',
+        title: 'Practice, share & review',
+        desc: 'Get detailed AI grading, share a quiz code with classmates, or retake past quizzes offline anytime.',
+    },
 ]
 
 const HowItWorks = () => {
+    const { colors } = useContext(themeContext)
     return (
-        <Box variant='bare' id='how-it-works' className='scroll-mt-24 flex flex-col items-center mt-32 px-3'>
-            <Reveal><QuoteComp text='THREE STEPS' showIcon={false} /></Reveal>
-            <Reveal delay={0.05}>
-                <Box className='flex mt-3'>
-                    <Header>How it works</Header>
-                </Box>
+        <section id='how-it-works' className='scroll-mt-24 max-w-6xl mx-auto px-5 md:px-8 pt-24 pb-8'>
+            <Reveal>
+                <div className='max-w-xl mb-12'>
+                    <p
+                        className='text-xs font-semibold uppercase tracking-widest mb-3'
+                        style={{ color: colors.primary, fontFamily: fonts.mono }}
+                    >
+                        Workflow
+                    </p>
+                    <Header>Three steps from notes to mastery</Header>
+                </div>
             </Reveal>
-            <Box variant='bare' className='grid grid-cols-1 md:grid-cols-3 gap-10 max-w-4xl w-full mt-14'>
+
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
                 {steps.map((s, i) => (
-                    <Reveal key={s.num} delay={i * 0.1}>
-                        <Box variant='bare' className='flex flex-col items-center text-center px-5'>
-                            <Box variant='small' className='w-13 h-13 rounded-full flex items-center justify-center mb-5'>
-                                <Text className='font-bold text-lg' variant='blue'>{s.num}</Text>
-                            </Box>
-                            <Text className='font-bold text-lg mb-2'>{s.title}</Text>
-                            <Text variant='soft' className='text-sm max-w-60' style={{ fontFamily: fonts.body }}>{s.desc}</Text>
-                        </Box>
+                    <Reveal key={s.num} delay={i * 0.08}>
+                        <div
+                            className='pt-6 border-t flex flex-col gap-2.5'
+                            style={{ borderColor: colors.border }}
+                        >
+                            <span
+                                className='text-xs font-bold tracking-wider'
+                                style={{ color: colors.primary, fontFamily: fonts.mono }}
+                            >
+                                {s.num}
+                            </span>
+                            <Text className='font-semibold text-lg'>{s.title}</Text>
+                            <Text variant='soft' className='text-sm leading-relaxed'>
+                                {s.desc}
+                            </Text>
+                        </div>
                     </Reveal>
                 ))}
-            </Box>
-        </Box>
+            </div>
+        </section>
     )
 }
 

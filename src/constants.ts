@@ -2,42 +2,42 @@
 export const colorsDefinition = {
   "light": {
     "white": "#FFFFFF",
-    "background": "#F2F2F7",
+    "background": "#FBFBFD",
     "backgroundRaised": "#FFFFFF",
-    "backgroundSunken": "#E6E6EE",
-    "text": "#1C1C1E",
-    "textSoft": "#6E6E73",
-    "primary": "#007AFF",
-    "primarySoft": "rgba(0, 122, 255, 0.12)",
-    "secondary": "#5E5CE6",
-    "success": "#34C759",
-    "border": "rgba(0, 0, 0, 0.09)",
-    "glowA": "rgba(0, 122, 255, 0.28)",
-    "glowB": "rgba(94, 92, 230, 0.22)"
+    "backgroundSunken": "#F2F3F7",
+    "text": "#111827",
+    "textSoft": "#5B6475",
+    "primary": "#0066CC",
+    "primarySoft": "rgba(0, 102, 204, 0.08)",
+    "secondary": "#0052A3",
+    "success": "#16A34A",
+    "border": "rgba(17, 24, 39, 0.09)",
+    "glowA": "rgba(0, 102, 204, 0.06)",
+    "glowB": "rgba(0, 102, 204, 0.03)"
   },
   "dark": {
     "white": "#FFFFFF",
-    "background": "#08080B",
-    "backgroundRaised": "#18181C",
-    "backgroundSunken": "#0F0F13",
-    "text": "#F5F5F7",
-    "textSoft": "#98989D",
-    "primary": "#0A84FF",
-    "primarySoft": "rgba(10, 132, 255, 0.16)",
-    "secondary": "#7D7AFF",
-    "success": "#30D158",
-    "border": "rgba(255, 255, 255, 0.11)",
-    "glowA": "rgba(10, 132, 255, 0.35)",
-    "glowB": "rgba(125, 122, 255, 0.28)"
+    "background": "#09090B",
+    "backgroundRaised": "#121215",
+    "backgroundSunken": "#18181C",
+    "text": "#F4F4F5",
+    "textSoft": "#A1A1AA",
+    "primary": "#2F81F7",
+    "primarySoft": "rgba(47, 129, 247, 0.12)",
+    "secondary": "#1F6FEB",
+    "success": "#22C55E",
+    "border": "rgba(255, 255, 255, 0.10)",
+    "glowA": "rgba(47, 129, 247, 0.08)",
+    "glowB": "rgba(47, 129, 247, 0.04)"
   }
 }
 export const theme = {
   colors: colorsDefinition.dark,
 }
 export const fonts = {
-  "display": "'Plus Jakarta Sans', sans-serif",
-  "body": "'Plus Jakarta Sans', sans-serif",
-  "mono": "'JetBrains Mono', monospace"
+  "display": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  "body": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  "mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
 }
 
 

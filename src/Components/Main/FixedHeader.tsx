@@ -3,7 +3,7 @@ import { AuthModal } from "../AuthModal";
 import { MobileMenu } from "../MobileMenu";
 import appIcon from '../../assets/app-icon-real.png'
 import { SignInSuccessToast } from "../SignInSuccessToast";
-import { Box, Button, Text } from "../UI";
+import { Button, Text } from "../UI";
 import { useContext, useEffect, useState } from "react";
 import { authContext, themeContext } from "../../Context/context";
 import { colorsDefinition, } from "../../constants";
@@ -38,49 +38,81 @@ const FixedHeader = () => {
 
     return (
         <>
-            <Box variant='fixed-header' className='z-50 fixed top-0 left-0 w-screen h-19 text-white flex items-center justify-between px-10'>
-                <div className='flex items-center flex-row'>
-                    <img src={appIcon} alt="Logo" className="h-8 rounded-lg" />
-                    <Text className='ml-4 font-bold'>Skolarix</Text>
-                </div>
-                <div className='hidden md:flex items-center flex-row'>
-                    {centerLinks.map((link) => (
-                        <Text key={link.slug} className='ml-4'>
-                            <a href={`#${link.slug}`} onClick={scrollToSection(link.slug)}>{link.text}</a>
-                        </Text>
-                    ))}
-                </div>
-                <div className='flex items-center flex-row'>
-                    <button
-                        onClick={() => setDarkMode(!darkMode)}
-                        aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                        className='relative flex items-center w-14 h-8 rounded-full px-1 transition-colors duration-300 cursor-pointer'
-                        style={{ backgroundColor: darkMode ? '#334155' : colors.primary }}
-                    >
-                        <span
-                            className='flex items-center justify-center w-6 h-6 rounded-full bg-white shadow-md transform transition-transform duration-300'
-                            style={{ transform: darkMode ? 'translateX(24px)' : 'translateX(0px)' }}
+            <header
+                className='z-50 fixed top-0 left-0 w-full h-16 backdrop-blur-md border-b transition-colors duration-200'
+                style={{
+                    backgroundColor: darkMode ? 'rgba(9, 9, 11, 0.85)' : 'rgba(251, 251, 253, 0.88)',
+                    borderColor: colors.border,
+                }}
+            >
+                <div className='max-w-6xl mx-auto h-full px-5 md:px-8 flex items-center justify-between gap-4'>
+                    <a href='#' className='flex items-center gap-2.5'>
+                        <img src={appIcon} alt="Skolarix Logo" className="h-7 w-7 rounded-md" />
+                        <Text className='font-semibold text-base tracking-tight'>Skolarix</Text>
+                    </a>
+
+                    <nav aria-label="Main navigation" className='hidden md:flex items-center gap-7'>
+                        {centerLinks.map((link) => (
+                            <a
+                                key={link.slug}
+                                href={`#${link.slug}`}
+                                onClick={scrollToSection(link.slug)}
+                                className='text-sm font-medium transition-opacity hover:opacity-75'
+                                style={{ color: colors.textSoft }}
+                            >
+                                {link.text}
+                            </a>
+                        ))}
+                    </nav>
+
+                    <div className='flex items-center gap-3'>
+                        <button
+                            onClick={() => setDarkMode(!darkMode)}
+                            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                            className='relative flex items-center w-12 h-7 rounded-full px-1 transition-colors duration-200 cursor-pointer border'
+                            style={{
+                                backgroundColor: colors.backgroundSunken,
+                                borderColor: colors.border,
+                            }}
                         >
-                            {darkMode ? <Moon size={14} color='#334155' /> : <Sun size={14} color={colors.success} />}
-                        </span>
-                    </button>
+                            <span
+                                className='flex items-center justify-center w-5 h-5 rounded-full shadow-xs transition-transform duration-200'
+                                style={{
+                                    backgroundColor: colors.backgroundRaised,
+                                    transform: darkMode ? 'translateX(19px)' : 'translateX(0px)',
+                                }}
+                            >
+                                {darkMode ? <Moon size={11} color={colors.textSoft} /> : <Sun size={11} color={colors.text} />}
+                            </span>
+                        </button>
 
-                    {user ? (
-                        <AccountMenu email={user.email} onSignOut={handleSignOut} />
-                    ) : (
-                        <>
-                            <Button variant='ghost' className='ml-4 max-md:hidden' onClick={() => setShowAuth(true)}>
-                                <Text>Sign in</Text>
+                        {user ? (
+                            <AccountMenu email={user.email} onSignOut={handleSignOut} />
+                        ) : (
+                            <Button
+                                variant='ghost'
+                                className='max-md:hidden text-sm font-medium px-3.5 py-1.5 rounded-lg border'
+                                style={{
+                                    backgroundColor: colors.backgroundRaised,
+                                    borderColor: colors.border,
+                                    color: colors.text,
+                                }}
+                                onClick={() => setShowAuth(true)}
+                            >
+                                Sign in
                             </Button>
-                        </>
-                    )}
+                        )}
 
-                    <button onClick={() => setMobileOpen((o) => !o)} className='md:hidden ml-4 cursor-pointer'>
-                        {mobileOpen ? <X color={colors.text} /> : <Menu color={colors.text} />}
-                    </button>
+                        <button
+                            onClick={() => setMobileOpen((o) => !o)}
+                            className='md:hidden p-1.5 rounded-md cursor-pointer'
+                            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+                        >
+                            {mobileOpen ? <X size={20} color={colors.text} /> : <Menu size={20} color={colors.text} />}
+                        </button>
+                    </div>
                 </div>
-                <hr className='absolute bottom-0 left-0 w-full border-t border-gray-700' />
-            </Box>
+            </header>
 
             <MobileMenu
                 open={mobileOpen}

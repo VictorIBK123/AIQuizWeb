@@ -15,7 +15,9 @@ const footerColumns: {
         title: 'NAVIGATE', links: [
             { text: 'Features', href: '/#features', slug: 'features' },
             { text: 'FAQ', href: '/#faq', slug: 'faq' },
-            { text: 'Contact', href: 'https://wa.me/2349079172441', slug: null },
+            { text: 'Support', href: '/support', slug: null, isRoute: true },
+            { text: 'Email Support', href: 'mailto:app.skolarix@gmail.com', slug: null },
+            { text: 'WhatsApp', href: 'https://wa.me/2349079172441', slug: null },
         ]
     },
     {
@@ -91,6 +93,9 @@ const Footer = () => {
             </Box>
             <Box variant='bare' className='flex justify-between flex-wrap gap-3 max-w-6xl mx-auto mt-12 pt-6 border-t' style={{ borderColor: colors.border }}>
                 <Text variant='soft' className='text-xs'>© 2026 VictorIbk Labs. All rights reserved.</Text>
+                <a href='mailto:app.skolarix@gmail.com' className='text-xs underline underline-offset-2' style={{ color: colors.textSoft }}>
+                    Support: app.skolarix@gmail.com
+                </a>
             </Box>
         </Box>
     )

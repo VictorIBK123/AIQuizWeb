@@ -42,7 +42,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ open, onClose, links, on
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -16 }}
                         transition={{ duration: 0.25, ease: 'easeOut' }}
-                        className='absolute top-19 left-0 w-full'
+                        className='absolute top-16 left-0 w-full'
                     >
                         <Box
                             variant='bare'

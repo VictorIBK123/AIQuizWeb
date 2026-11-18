@@ -228,7 +228,7 @@ export const PRIVACY_POLICY_DOC: LegalDocument = {
                 'AI services: used on the backend to process submitted study material, generate quizzes, and grade theory answers.',
                 'Sign in with Apple: used for iOS authentication and optional Private Relay email forwarding, subject to Apple’s privacy policy.',
                 'Google Sign-In: used for authentication, subject to Google’s privacy policy.',
-                'Email delivery (Resend): used to send verification codes, welcome emails, subscription notices, and security alerts.',
+                'Email delivery services: used to send verification codes, welcome emails, subscription notices, and security alerts.',
                 'Payment & subscription providers (Apple App Store, Google Play, RevenueCat, and Paystack): used to process and verify subscriptions without storing full payment card details on our servers.',
             ],
         },
