@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Apple, X } from 'lucide-react';
-import { Box, Button, Text } from './UI';
+import { Box, Text } from './UI';
 import { fonts } from '../constants';
 import { themeContext } from '../Context/context';
 import appIcon from '../assets/app-icon-real.png';
+import IosWaitlistForm from './IosWaitlistForm';
 
 interface ComingSoonModalProps {
     isOpen: boolean;
@@ -17,7 +18,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
     isOpen,
     onClose,
     title = 'iOS App Coming Soon',
-    description = "We're putting the finishing touches on the iOS version of Skolarix. It will be available on the Apple App Store soon!",
+    description = "Our iPhone app is currently in App Store review. Drop your email below and we'll notify you the moment it goes live.",
 }) => {
     const { colors } = useContext(themeContext);
 
@@ -67,19 +68,13 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
                             <Text className='font-bold text-2xl mb-2'>{title}</Text>
                             <Text
                                 variant='soft'
-                                className='text-sm leading-relaxed mb-6 max-w-sm mx-auto'
+                                className='text-sm leading-relaxed mb-5 max-w-sm mx-auto'
                                 style={{ fontFamily: fonts.body }}
                             >
                                 {description}
                             </Text>
 
-                            <Button
-                                variant='primary'
-                                className='w-full py-3 text-sm font-semibold'
-                                onClick={onClose}
-                            >
-                                <Text variant='fixedWhite'>Got it</Text>
-                            </Button>
+                            <IosWaitlistForm source='modal' compact onDone={onClose} />
                         </Box>
                     </motion.div>
                 </motion.div>

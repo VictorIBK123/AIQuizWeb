@@ -5,6 +5,7 @@ import JoinQuizPage from './Components/JoinQuizPage';
 import LegalPage from './Components/Legal/LegalPage';
 import DeleteAccountPage from './Components/Legal/DeleteAccountPage';
 import SupportPage from './Components/Legal/SupportPage';
+import IosWaitlistPage from './Components/IosWaitlistPage';
 import { AuthModal } from './Components/AuthModal';
 import { Text } from './Components/UI';
 import { fonts, baseUrl } from './constants';
@@ -289,7 +290,7 @@ const Main = () => {
                       fontFamily: fonts.mono,
                     }}
                   >
-                    iOS · Android · Web
+                    iOS · Android
                   </span>
                 </FadeIn>
 
@@ -364,6 +365,9 @@ function App() {
             <Route path="/del-acct" element={<DeleteAccountPage />} />
             <Route path="/delete-account" element={<Navigate to="/del-acct" replace />} />
             <Route path="/support" element={<SupportPage />} />
+            <Route path="/ios" element={<IosWaitlistPage />} />
+            <Route path="/waitlist" element={<IosWaitlistPage />} />
+            <Route path="/rsvp" element={<IosWaitlistPage />} />
             <Route path="*" element={<Main />} />
           </Routes>
         </BrowserRouter>

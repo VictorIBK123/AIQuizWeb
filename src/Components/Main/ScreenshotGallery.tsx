@@ -1,12 +1,11 @@
 
-import Screenshot1 from '../../assets/screenshot1.png'
-import Screenshot2 from '../../assets/screenshot2.png'
-import Screenshot3 from '../../assets/screenshot3.png'
-import Screenshot4 from '../../assets/screenshot4.png'
-import Screenshot5 from '../../assets/screenshot5.png'
-import Screenshot6 from '../../assets/screenshot6.png'
-import Screenshot7 from '../../assets/screenshot7.png'
-import Screenshot8 from '../../assets/screenshot8.png'
+import Screenshot1 from '../../assets/ios-screenshots/01-welcome.png'
+import Screenshot2 from '../../assets/ios-screenshots/02-share-quiz.png'
+import Screenshot3 from '../../assets/ios-screenshots/03-strict-mode.png'
+import Screenshot4 from '../../assets/ios-screenshots/04-scores.png'
+import Screenshot5 from '../../assets/ios-screenshots/05-explanations.png'
+import Screenshot6 from '../../assets/ios-screenshots/06-manage-attempts.png'
+import Screenshot7 from '../../assets/ios-screenshots/07-attempt-history.png'
 import { Text } from '../UI'
 import { themeContext } from '../../Context/context'
 import { useContext } from 'react'
@@ -15,14 +14,13 @@ import Header from './Header'
 import { fonts } from '../../constants'
 
 const screenshotDetails = [
-    { name: 'Sign In', img: Screenshot1 },
-    { name: 'Home', img: Screenshot2 },
-    { name: 'Upload', img: Screenshot3 },
-    { name: 'Quiz', img: Screenshot4 },
-    { name: 'Result', img: Screenshot5 },
-    { name: 'Quiz Review', img: Screenshot6 },
-    { name: 'History', img: Screenshot7 },
-    { name: 'Attempt History', img: Screenshot8 },
+    { name: 'Welcome', img: Screenshot1 },
+    { name: 'Share Quizzes', img: Screenshot2 },
+    { name: 'Strict Mode', img: Screenshot3 },
+    { name: 'Score Breakdown', img: Screenshot4 },
+    { name: 'Explanations', img: Screenshot5 },
+    { name: 'Quiz Attempts', img: Screenshot6 },
+    { name: 'Attempt History', img: Screenshot7 },
 ]
 
 const ScreenshotGallery = () => {
@@ -61,7 +59,7 @@ const ScreenshotGallery = () => {
                                 <img
                                     src={item.img}
                                     alt={item.name}
-                                    className='rounded-xl object-cover h-84 w-42'
+                                    className='rounded-xl object-contain aspect-[480/990] w-44 sm:w-48'
                                 />
                             </div>
                             <Text
