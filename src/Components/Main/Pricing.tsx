@@ -37,11 +37,12 @@ const plans = [
     {
         name: 'Pro', price: '₦1,500', period: '/ month', desc: 'Higher limits, file & photo uploads, unlimited Strict Mode, and full analytics.',
         features: [
-            'Increased daily quiz generations',
+            'Increased daily quiz generations & priority access',
             'Upload PDF, DOCX documents & photos/images',
             'Unlimited Strict Mode & unlimited quiz retakes',
-            'Unlimited Shared Quizzes with PDF & CSV exports',
-            'Full quiz history with search, filters & detailed analytics',
+            'Unlimited Saved Quizzes & unlimited Quiz History with search & filters',
+            'Unlimited Shared Quizzes, unlimited participant responses & PDF/CSV exports',
+            'Full analytics: per-topic breakdowns, difficulty charts & 7/14/30-day trends',
             '7-day free trial',
         ],
         cta: 'Upgrade to Pro', featured: true,
