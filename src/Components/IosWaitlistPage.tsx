@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Apple, ArrowLeft, Moon, Sun } from 'lucide-react';
+import { Apple, ArrowLeft, ExternalLink, Moon, Sun } from 'lucide-react';
 import appIcon from '../assets/app-icon-real.png';
-import { colorsDefinition, fonts } from '../constants';
+import { colorsDefinition, fonts, iosAppStoreUrl } from '../constants';
 import { themeContext } from '../Context/context';
 import Footer from './Main/Footer';
-import IosWaitlistForm from './IosWaitlistForm';
 
 export const IosWaitlistPage: React.FC = () => {
     const { colors, setColors } = useContext(themeContext);
@@ -64,7 +63,7 @@ export const IosWaitlistPage: React.FC = () => {
 
             <main className="max-w-lg w-full mx-auto px-4 sm:px-6 py-10 sm:py-16">
                 <div
-                    className="rounded-2xl border p-6 sm:p-8 shadow-sm"
+                    className="rounded-2xl border p-6 sm:p-8 shadow-sm text-center"
                     style={{
                         backgroundColor: colors.backgroundRaised,
                         borderColor: colors.border,
@@ -86,19 +85,28 @@ export const IosWaitlistPage: React.FC = () => {
                     </div>
 
                     <h1
-                        className="text-2xl sm:text-3xl font-bold text-center tracking-tight"
+                        className="text-2xl sm:text-3xl font-bold tracking-tight"
                         style={{ fontFamily: fonts.display }}
                     >
-                        Skolarix for iOS
+                        Skolarix for iOS is Live
                     </h1>
                     <p
-                        className="text-sm text-center mt-2 mb-6 leading-relaxed"
+                        className="text-sm mt-2 mb-6 leading-relaxed"
                         style={{ color: colors.textSoft }}
                     >
-                        Our iPhone app is currently in App Store review. Drop your email below and we&apos;ll notify you the moment it goes live.
+                        Download Skolarix on the Apple App Store to generate quizzes from PDFs, notes, and photos right on your iPhone.
                     </p>
 
-                    <IosWaitlistForm source="ios-page" />
+                    <a
+                        href={iosAppStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full rounded-xl py-3 px-5 font-semibold text-sm text-white transition-opacity hover:opacity-90 inline-flex items-center justify-center gap-2"
+                        style={{ backgroundColor: colors.primary }}
+                    >
+                        <span>Download on the App Store</span>
+                        <ExternalLink size={16} />
+                    </a>
                 </div>
             </main>
 

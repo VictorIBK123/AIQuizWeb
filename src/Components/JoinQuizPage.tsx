@@ -2,16 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Check, Copy, ExternalLink, Smartphone, Sparkles, ArrowRight } from 'lucide-react';
 import { themeContext } from '../Context/context';
-import { fonts } from '../constants';
+import { fonts, iosAppStoreUrl } from '../constants';
 import appIcon from '../assets/app-icon-real.png';
-import { ComingSoonModal } from './ComingSoonModal';
 
 export const JoinQuizPage: React.FC = () => {
     const { code: rawCode } = useParams<{ code?: string }>();
     const { colors } = useContext(themeContext);
     const [inputCode, setInputCode] = useState(rawCode?.toUpperCase() || '');
     const [copied, setCopied] = useState(false);
-    const [showIosModal, setShowIosModal] = useState(false);
 
     const activeCode = rawCode ? rawCode.toUpperCase() : inputCode.trim().toUpperCase();
 
@@ -229,17 +227,20 @@ export const JoinQuizPage: React.FC = () => {
                             <span>Download for Android</span>
                         </a>
 
-                        <button
-                            onClick={() => setShowIosModal(true)}
-                            className="flex-1 py-3 px-4 rounded-xl border text-center font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-transform duration-200 hover:scale-[1.02] cursor-pointer"
+                        <a
+                            href={iosAppStoreUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 py-3 px-4 rounded-xl border text-center font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-transform duration-200 hover:scale-[1.02] no-underline"
                             style={{
                                 backgroundColor: colors.backgroundSunken,
                                 borderColor: colors.border,
-                                color: colors.textSoft,
+                                color: colors.text,
                             }}
                         >
+                            <ExternalLink size={15} />
                             <span>Download for iOS</span>
-                        </button>
+                        </a>
                     </div>
 
                     {/* Quick Steps */}
@@ -266,11 +267,6 @@ export const JoinQuizPage: React.FC = () => {
             <footer className="w-full max-w-5xl mx-auto px-6 py-6 text-center text-xs" style={{ color: colors.textSoft }}>
                 &copy; {new Date().getFullYear()} Skolarix. All rights reserved.
             </footer>
-
-            <ComingSoonModal
-                isOpen={showIosModal}
-                onClose={() => setShowIosModal(false)}
-            />
         </div>
     );
 };

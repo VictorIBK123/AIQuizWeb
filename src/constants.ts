@@ -44,3 +44,5 @@ export const fonts = {
 export const timeout = 60000;
 
 export const baseUrl = import.meta.env.DEV ? '' : import.meta.env.VITE_BASE_URL;
+
+export const iosAppStoreUrl = 'https://apps.apple.com/ng/app/skolarix/id6835212324';
