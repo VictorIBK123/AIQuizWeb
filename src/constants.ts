@@ -45,4 +45,5 @@ export const timeout = 60000;
 
 export const baseUrl = import.meta.env.DEV ? '' : import.meta.env.VITE_BASE_URL;
 
-export const iosAppStoreUrl = 'https://apps.apple.com/ng/app/skolarix/id6835212324';
+export const iosAppStoreUrl = 'https://apps.apple.com/app/skolarix/id6835212324';
+export const androidPlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.victoribk.AIQuizApp';

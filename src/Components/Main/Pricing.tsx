@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { Reveal } from "../Motion";
 import { Text, Box, Button } from "../UI";
 import { authContext, themeContext, uiContext } from "../../Context/context";
@@ -6,7 +6,8 @@ import Header from "./Header";
 import {
     CheckCircle2
 } from 'lucide-react';
-import { fonts } from "../../constants";
+import { androidPlayStoreUrl, fonts, iosAppStoreUrl } from "../../constants";
+import { PAYSTACK_COUNTRY_NAMES, isPaystackSupportedRegion } from "../../utils/region";
 const subStatusConfig: Record<string, { label: string }> = {
     trial: { label: 'Free Trial' },
     active: { label: 'Active' },
@@ -53,6 +54,12 @@ const Pricing = () => {
     const { colors } = useContext(themeContext)
     const { openSignup, requestUpgrade, isSubscribing, isPremium, subscription } = useContext(uiContext)
     const { user } = useContext(authContext)
+    const canPayWithPaystack = useMemo(() => isPaystackSupportedRegion(), [])
+    const supportedCountriesLabel = useMemo(
+        () => Object.values(PAYSTACK_COUNTRY_NAMES).join(', '),
+        []
+    )
+
     return (
         <section id='pricing' className='scroll-mt-24 max-w-6xl mx-auto px-5 md:px-8 pt-24 pb-8'>
             <Reveal>
@@ -98,10 +105,20 @@ const Pricing = () => {
                                 )}
                             </div>
 
-                            <div className='flex items-baseline gap-1.5 pb-5 border-b' style={{ borderColor: colors.border }}>
-                                <Text className='text-4xl font-bold tracking-tight'>{p.price}</Text>
-                                <Text variant='soft' className='text-sm'>{p.period}</Text>
-                            </div>
+                            {canPayWithPaystack ? (
+                                <div className='flex items-baseline gap-1.5 pb-5 border-b' style={{ borderColor: colors.border }}>
+                                    <Text className='text-4xl font-bold tracking-tight'>{p.price}</Text>
+                                    <Text variant='soft' className='text-sm'>{p.period}</Text>
+                                </div>
+                            ) : (
+                                <div className='pb-5 border-b' style={{ borderColor: colors.border }}>
+                                    <Text variant='soft' className='text-sm'>
+                                        {p.featured
+                                            ? 'Available in the Skolarix iOS & Android app'
+                                            : 'Included at no cost on mobile and web'}
+                                    </Text>
+                                </div>
+                            )}
 
                             {p.featured && isPremium ? (
                                 <Box variant='bare' className='flex flex-col flex-1 divide-y' style={{ borderColor: colors.border }}>
@@ -129,13 +146,13 @@ const Pricing = () => {
                                     {subscription?.nextPaymentDate && (
                                         <DetailRow
                                             label={subscription.status === 'trial' ? 'Trial ends' : 'Next renewal'}
-                                            value={new Date(subscription.nextPaymentDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                            value={new Date(subscription.nextPaymentDate).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}
                                         />
                                     )}
                                     {subscription?.createdAt && (
                                         <DetailRow
                                             label='Subscribed on'
-                                            value={new Date(subscription.createdAt).toLocaleDateString('en-NG', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                            value={new Date(subscription.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}
                                         />
                                     )}
                                 </Box>
@@ -150,24 +167,70 @@ const Pricing = () => {
                                 </div>
                             )}
 
-                            {(!isPremium && (p.featured || !user)) && (
+                            {!isPremium && p.featured && (
+                                canPayWithPaystack ? (
+                                    <div className='flex flex-col gap-2.5'>
+                                        <Button
+                                            id={`btn-pricing-${p.name.toLowerCase()}`}
+                                            variant='primary'
+                                            className='w-full justify-center py-3 rounded-xl border text-sm font-semibold'
+                                            onClick={requestUpgrade}
+                                            disabled={isSubscribing}
+                                        >
+                                            <Text variant='fixedWhite' className='text-sm font-semibold'>
+                                                {isSubscribing ? 'Redirecting…' : p.cta}
+                                            </Text>
+                                        </Button>
+                                        <Text variant='soft' className='text-xs text-center leading-relaxed'>
+                                            Paystack checkout supported in {supportedCountriesLabel}. Also available in the mobile app.
+                                        </Text>
+                                    </div>
+                                ) : (
+                                    <div className='flex flex-col gap-2.5'>
+                                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-2.5'>
+                                            <a
+                                                href={iosAppStoreUrl}
+                                                target='_blank'
+                                                rel='noopener noreferrer'
+                                                className='w-full justify-center py-3 px-4 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 inline-flex items-center'
+                                                style={{ backgroundColor: colors.primary }}
+                                            >
+                                                App Store
+                                            </a>
+                                            <a
+                                                href={androidPlayStoreUrl}
+                                                target='_blank'
+                                                rel='noopener noreferrer'
+                                                className='w-full justify-center py-3 px-4 rounded-xl border text-sm font-semibold transition-opacity hover:opacity-80 inline-flex items-center'
+                                                style={{
+                                                    backgroundColor: colors.backgroundSunken,
+                                                    borderColor: colors.border,
+                                                    color: colors.text,
+                                                }}
+                                            >
+                                                Google Play
+                                            </a>
+                                        </div>
+                                        <Text variant='soft' className='text-xs text-center leading-relaxed'>
+                                            Subscribe in the Skolarix app in your local currency with a 7-day free trial.
+                                        </Text>
+                                    </div>
+                                )
+                            )}
+
+                            {!isPremium && !p.featured && !user && (
                                 <Button
                                     id={`btn-pricing-${p.name.toLowerCase()}`}
-                                    variant={p.featured ? 'primary' : 'ghost'}
+                                    variant='ghost'
                                     className='w-full justify-center py-3 rounded-xl border text-sm font-semibold'
-                                    style={
-                                        p.featured
-                                            ? undefined
-                                            : {
-                                                  backgroundColor: colors.backgroundSunken,
-                                                  borderColor: colors.border,
-                                              }
-                                    }
-                                    onClick={p.featured ? requestUpgrade : openSignup}
-                                    disabled={p.featured && isSubscribing}
+                                    style={{
+                                        backgroundColor: colors.backgroundSunken,
+                                        borderColor: colors.border,
+                                    }}
+                                    onClick={openSignup}
                                 >
-                                    <Text variant={p.featured ? 'fixedWhite' : 'white'} className='text-sm font-semibold'>
-                                        {p.featured && isSubscribing ? 'Redirecting…' : p.cta}
+                                    <Text variant='white' className='text-sm font-semibold'>
+                                        {p.cta}
                                     </Text>
                                 </Button>
                             )}

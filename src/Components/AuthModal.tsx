@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Box, Button, Input, Text } from './UI';
 import { OtpInput } from './OtpInput';
@@ -33,6 +33,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
     const [resendCooldown, setResendCooldown] = useState(0);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
+    const [termsError, setTermsError] = useState(false);
 
     const { setUser, setAccessToken } = useContext(authContext);
     const { colors } = useContext(themeContext);
@@ -46,11 +48,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
 
     // reset to the requested mode every time the modal opens
     useEffect(() => {
-        if (isOpen) setMode(initialMode ?? 'signin');
+        if (isOpen) {
+            setMode(initialMode ?? 'signin');
+            setTermsError(false);
+        }
     }, [isOpen]);
 
     const switchMode = (m: Mode) => {
         setError('');
+        setTermsError(false);
         setOtp(emptyOtp());
         setMode(m);
     };
@@ -58,6 +64,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
     const handleClose = () => {
         setError('');
         setSuccessMessage('');
+        setTermsError(false);
+        setAgreedToTerms(false);
         setOtp(emptyOtp());
         setName('');
         setPassword('');
@@ -110,9 +118,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
         e.preventDefault();
         setError('');
 
-        if (mode === 'signup' && password !== confirmPassword) {
-            setError('Passwords do not match.');
-            return;
+        if (mode === 'signup') {
+            if (password !== confirmPassword) {
+                setError('Passwords do not match.');
+                return;
+            }
+            if (!agreedToTerms) {
+                setTermsError(true);
+                setError('Please agree to the Terms of Use and Privacy Policy.');
+                return;
+            }
         }
         if (mode === 'resetPassword' && newPassword !== confirmNewPassword) {
             setError('Passwords do not match.');
@@ -376,6 +391,68 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
                                                 />
                                             )}
 
+                                            {mode === 'signup' && (
+                                                <label
+                                                    className='flex items-start gap-2.5 cursor-pointer select-none text-xs leading-relaxed'
+                                                    style={{ color: colors.textSoft, fontFamily: fonts.body }}
+                                                >
+                                                    <input
+                                                        type='checkbox'
+                                                        className='sr-only'
+                                                        checked={agreedToTerms}
+                                                        onChange={(e) => {
+                                                            const checked = e.target.checked;
+                                                            setAgreedToTerms(checked);
+                                                            if (checked) {
+                                                                setTermsError(false);
+                                                                if (error === 'Please agree to the Terms of Use and Privacy Policy.') {
+                                                                    setError('');
+                                                                }
+                                                            }
+                                                        }}
+                                                    />
+                                                    <span
+                                                        aria-hidden='true'
+                                                        className='mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border transition-colors'
+                                                        style={{
+                                                            backgroundColor: agreedToTerms ? colors.primary : colors.backgroundSunken,
+                                                            borderColor: termsError && !agreedToTerms
+                                                                ? '#FF3B30'
+                                                                : agreedToTerms
+                                                                    ? colors.primary
+                                                                    : colors.border,
+                                                        }}
+                                                    >
+                                                        {agreedToTerms && <Check size={12} strokeWidth={3} color={colors.white} />}
+                                                    </span>
+                                                    <span>
+                                                        I agree to the{' '}
+                                                        <a
+                                                            href='/legal/terms-of-use'
+                                                            target='_blank'
+                                                            rel='noopener noreferrer'
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            className='underline font-medium'
+                                                            style={{ color: colors.primary }}
+                                                        >
+                                                            Terms of Use
+                                                        </a>
+                                                        {' '}and{' '}
+                                                        <a
+                                                            href='/legal/privacy-policy'
+                                                            target='_blank'
+                                                            rel='noopener noreferrer'
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            className='underline font-medium'
+                                                            style={{ color: colors.primary }}
+                                                        >
+                                                            Privacy Policy
+                                                        </a>
+                                                        .
+                                                    </span>
+                                                </label>
+                                            )}
+
                                             {mode === 'signin' && (
                                                 <button
                                                     type='button'
@@ -402,7 +479,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
                                                 )}
                                             </AnimatePresence>
 
-                                            <Button variant='primary' type='submit' className='mt-2 justify-center' disabled={loading}>
+                                            <Button
+                                                variant='primary'
+                                                type='submit'
+                                                className={`mt-2 justify-center ${mode === 'signup' && !agreedToTerms ? 'opacity-60' : ''}`}
+                                                disabled={loading}
+                                            >
                                                 <Text variant='white'>
                                                     {loading
                                                         ? 'Please wait…'
@@ -437,13 +519,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuc
                                             >
                                                 {mode === 'signin' ? 'Sign up' : 'Sign in'}
                                             </button>
-                                        </Text>
-                                    )}
-
-                                    {mode === 'signup' && (
-                                        <Text variant='soft' className='text-center mt-4 text-xs' style={{ fontFamily: fonts.body }}>
-                                            By creating an account, you agree to our{' '}
-                                            <a href='https://privacy-policy.skolarix.app/' target='_blank' rel='noopener noreferrer' className='underline' style={{ color: colors.textSoft }}>Privacy Policy</a>.
                                         </Text>
                                     )}
                                 </motion.div>
