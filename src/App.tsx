@@ -6,6 +6,7 @@ import LegalPage from './Components/Legal/LegalPage';
 import DeleteAccountPage from './Components/Legal/DeleteAccountPage';
 import SupportPage from './Components/Legal/SupportPage';
 import IosWaitlistPage from './Components/IosWaitlistPage';
+import SeoLandingPage from './Components/SeoLandingPage';
 import { AuthModal } from './Components/AuthModal';
 import { Text } from './Components/UI';
 import { fonts, baseUrl } from './constants';
@@ -365,6 +366,9 @@ function App() {
             <Route path="/del-acct" element={<DeleteAccountPage />} />
             <Route path="/delete-account" element={<Navigate to="/del-acct" replace />} />
             <Route path="/support" element={<SupportPage />} />
+            <Route path="/pdf-to-quiz" element={<SeoLandingPage slug="pdf-to-quiz" />} />
+            <Route path="/math-quiz-generator" element={<SeoLandingPage slug="math-quiz-generator" />} />
+            <Route path="/tutor-quiz-maker" element={<SeoLandingPage slug="tutor-quiz-maker" />} />
             <Route path="/ios" element={<IosWaitlistPage />} />
             <Route path="/waitlist" element={<IosWaitlistPage />} />
             <Route path="/rsvp" element={<IosWaitlistPage />} />

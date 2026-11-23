@@ -21,6 +21,13 @@ const footerColumns: {
         ]
     },
     {
+        title: 'USE CASES', links: [
+            { text: 'PDF to Quiz', href: '/pdf-to-quiz', slug: null, isRoute: true },
+            { text: 'Math Quiz Generator', href: '/math-quiz-generator', slug: null, isRoute: true },
+            { text: 'Tutor Quiz Maker', href: '/tutor-quiz-maker', slug: null, isRoute: true },
+        ]
+    },
+    {
         title: 'LEGAL', links: [
             { text: 'Privacy policy', href: '/legal/privacy-policy', slug: null, isRoute: true },
             { text: 'Terms of use', href: '/legal/terms-of-use', slug: null, isRoute: true },
@@ -43,7 +50,7 @@ const Footer = () => {
     return (
         <Box variant='bare' className='mt-32 px-6 md:px-16 pb-10'>
             <hr className='w-full border-t mb-14' style={{ borderColor: colors.border }} />
-            <Box variant='bare' className='grid grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto'>
+            <Box variant='bare' className='grid grid-cols-2 md:grid-cols-5 gap-10 max-w-6xl mx-auto'>
                 <Box variant='bare'>
                     <Box className='flex items-center flex-row'>
                         <img src={appIcon} alt='Logo' className='h-7 rounded-lg' />

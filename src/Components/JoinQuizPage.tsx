@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Check, Copy, ExternalLink, Smartphone, Sparkles, ArrowRight } from 'lucide-react';
 import { themeContext } from '../Context/context';
-import { fonts, iosAppStoreUrl } from '../constants';
+import { androidPlayStoreUrl, fonts, iosAppStoreUrl } from '../constants';
 import appIcon from '../assets/app-icon-real.png';
 
 export const JoinQuizPage: React.FC = () => {
@@ -213,7 +213,7 @@ export const JoinQuizPage: React.FC = () => {
                     {/* Download Buttons */}
                     <div className="flex flex-col sm:flex-row gap-3">
                         <a
-                            href="https://play.google.com/store/apps/details?id=com.victoribk.AIQuizApp"
+                            href={androidPlayStoreUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex-1 py-3 px-4 rounded-xl border text-center font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-transform duration-200 hover:scale-[1.02] no-underline"
@@ -255,10 +255,21 @@ export const JoinQuizPage: React.FC = () => {
                             How to take this quiz:
                         </p>
                         <ol className="text-xs space-y-1.5 list-decimal list-inside" style={{ color: colors.textSoft }}>
-                            <li>Open or install the <strong className="text-white">Skolarix</strong> mobile app.</li>
+                            <li>Open or install the <strong style={{ color: colors.text }}>Skolarix</strong> mobile app.</li>
                             <li>The quiz code will automatically load on your screen.</li>
                             <li>Answer questions, beat the timer, and view your score!</li>
                         </ol>
+                    </div>
+
+                    <div className="mt-5 text-center">
+                        <Link
+                            to="/pdf-to-quiz"
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold hover:opacity-80 transition-opacity"
+                            style={{ color: colors.primary }}
+                        >
+                            <span>Want to make your own AI quiz from PDFs or notes?</span>
+                            <ArrowRight size={13} />
+                        </Link>
                     </div>
                 </div>
             </main>
